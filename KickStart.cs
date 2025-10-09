@@ -256,6 +256,14 @@ namespace Better_Servers
         }
         */
 
+
+        public override void Update()
+        {
+            if (ManUI.inst.HasInitialised)
+                DebugBeS.DoShowWarnings();
+        }
+
+
         [Client]
         internal static void ProtectedServerDelay()
         {
@@ -397,7 +405,7 @@ namespace Better_Servers
         [Server]
         private void SetBlockLog()
         {
-            DebugBeS.Log("Setting up template reference...");
+            DebugBeS.Log("Saving...");
             string destination = BlockDirectory + up + "blockList.json";
             ValidateDirectory(BlockDirectory);
             try
@@ -444,6 +452,7 @@ namespace Better_Servers
             string infract = "INFRACTION: " + offendingPlayer.name + " has violated " + infraction + " for the following: " + desc;
             try
             {
+                UIHelpersExt.BigF5broningBanner(offendingPlayer.name + " - INFRACTION", false);
                 return SendChatServer(infract);
             }
             catch { }
@@ -777,7 +786,7 @@ namespace Better_Servers
             {
                 if (IsIngame)
                 {
-                    HotWindow = AltUI.Window(GUIBlockerID, HotWindow, GUIHandler, "<b>Unblock User Menu</b>", CloseGUI);
+                    HotWindow = AltUI.Window(GUIBlockerID, HotWindow, GUIHandler, "<b>Infraction List</b>", CloseGUI);
                 }
                 else
                     gameObject.SetActive(false);
@@ -814,14 +823,14 @@ namespace Better_Servers
                 {
                     try
                     {
-                        KeyValuePair<string, PlayerHistory> temp = blockedInfo.userInfractionsHost.ElementAt(step);
+                        KeyValuePair<string, BetterServerPlayer> temp = blockedInfo.userInfractionsHost.ElementAt(step);
                             HoriPosOff = 0;
                             VertPosOff += 30;
                             if (VertPosOff >= MaxWindowHeight)
                                 MaxExtensionY = true;
                         try
                         {
-                            string disp = "<color=#90ee90ff>" + temp.Value.ToString() + "</color>";
+                            string disp = temp.Value.name.ToString() + ": <color=#90ee90ff>" + temp.Value.InfractionCount.ToString() + "</color>";
 
                             if (GUILayout.Button(disp))
                             {
@@ -830,33 +839,36 @@ namespace Better_Servers
                             }
                             HoriPosOff += ButtonWidth;
                         }
+                        catch (ExitGUIException e) { throw e; }
                         catch { }
                     }
+                    catch (ExitGUIException e) { throw e; }
                     catch { }// error on handling something
                 }
+            }
 
-                GUILayout.EndScrollView();
-                scrolllSize = VertPosOff + 50;
 
-                if (MaxExtensionY)
-                    HotWindow.height = MaxWindowHeight + 80;
-                else
-                    HotWindow.height = VertPosOff + 80;
+            GUILayout.EndScrollView();
+            scrolllSize = VertPosOff + 50;
 
-                HotWindow.width = MaxWindowWidth + 60;
-                if (clicked)
-                {
-                    blockedInfo.userInfractionsHost.Remove(playerSelected);
-                    oInst.SetBlockLog();
-                    CloseGUI();
-                }
+            if (MaxExtensionY)
+                HotWindow.height = MaxWindowHeight + 80;
+            else
+                HotWindow.height = VertPosOff + 80;
 
-                GUI.DragWindow();
-                if (openTime <= 0 && !MouseIsOverSubMenu())
-                {
-                    ManSFX.inst.PlayUISFX(ManSFX.UISfxType.Close);
-                    CloseGUI();
-                }
+            HotWindow.width = MaxWindowWidth + 60;
+            if (clicked)
+            {
+                blockedInfo.userInfractionsHost.Remove(playerSelected);
+                oInst.SetBlockLog();
+                CloseGUI();
+            }
+
+            GUI.DragWindow();
+            if (openTime <= 0 && !MouseIsOverSubMenu())
+            {
+                ManSFX.inst.PlayUISFX(ManSFX.UISfxType.Close);
+                CloseGUI();
             }
             openTime -= Time.deltaTime / 2;
         }

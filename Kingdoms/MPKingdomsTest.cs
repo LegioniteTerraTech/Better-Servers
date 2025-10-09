@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using TerraTechETCUtil;
-using SafeSaves;
-using UnityEngine;
-using TerraTech.Network;
 using Newtonsoft.Json;
-using UnityEngine.Networking;
 using Payload.UI.Commands;
-using System.Security.Cryptography;
+using SafeSaves;
+using TerraTech.Network;
+using TerraTechETCUtil;
+using UnityEngine;
+using UnityEngine.Networking;
+using static MapGenerator;
 
 namespace Better_Servers
 {
     /// <summary>
-    /// Loaded by all clients
+    /// Loaded by all clients, but NOT RUN ON THEM
     /// </summary>
     public class MPPlayerSaveData
     {
@@ -208,7 +209,7 @@ namespace Better_Servers
                         tankID = int.MinValue;
                 }
                 if (ManNetwork.IsHost)
-                    UpdateUserBounds();
+                    ServerUpdatePlayerBoundsLimit();
             }
         }
 
@@ -217,14 +218,17 @@ namespace Better_Servers
         public IntVector2 CurCoord = default;
         [JsonIgnore]
         public static List<IntVector2> tiles = new List<IntVector2>();
-        private void UpdateUserBounds()
+        /// <summary>
+        /// This insures that the user has fully loaded WorldTiles around the next area for the bounds before moving the bounds to that area!
+        /// </summary>
+        private void ServerUpdatePlayerBoundsLimit()
         {
             if (MPKingdomsTest.tileLoaders.ContainsKey(directPlayer) && directPlayer?.CurTech?.tech != null)
-            {
+            {   // Our managed player has a fully ready Tech assigned to them!
                 WorldPosition WP = WorldPosition.FromScenePosition(directPlayer.CurTech.tech.boundsCentreWorldNoCheck);
                 IntVector2 newCoord = WP.TileCoord;
                 if (newCoord != CurCoord)
-                {
+                {   // The player is in a new WorldTile
                     tiles.Clear();
                     ManWorldTileExt.GetActiveTilesAround(tiles, WP, 2);
                     foreach (IntVector2 tile in tiles)
@@ -332,29 +336,50 @@ namespace Better_Servers
         private static NetworkHook<WorldPositionMessage> moveLimCall = new NetworkHook<WorldPositionMessage>(
             "BetterServers.WorldPositionMessage", OnMoveLimiterNetwork, NetMessageType.ToClientsOnly);
 
+        /// SERVER ONLY
+        [Server]
         internal static bool MovePlayerLimiter(WorldPosition WP, NetPlayer player)
         {
-            if (player == ManNetwork.inst.MyPlayer && ManNetwork.IsHost)
-            {
-                DebugBeS.Log("Set serverside client barrier to " + WP.TileCoord);
-                BarrierOrigin = WP;
-                MovePushbackBarrierClient(BarrierOrigin.ScenePosition);
-                FoundOurPlayer = true;
-                return true;
+            // ManNetwork.inst.MyPlayer can be null when the player is first added to the world!
+            if (ManNetwork.IsHost)
+            {   // Manage Server Host - Does not need to be networked.
+                if (ManNetwork.inst.MyPlayer == null)
+                {
+                    // This is our first setup, so we set as normal.
+                    DebugBeS.Log("First setup server barrier " + WP.TileCoord);
+                    MovePushbackBarrierClient(BarrierOrigin.ScenePosition);
+                    FoundOurPlayer = true;
+                    return true;
+                }
+                else if (player == ManNetwork.inst.MyPlayer)
+                {
+                    DebugBeS.Log("Set serverside client barrier to " + WP.TileCoord);
+                    Singleton.Manager<UIMPChat>.inst.AddMissionMessage("Server barrier set " + WP.TileCoord);
+                    BarrierOrigin = WP;
+                    MovePushbackBarrierClient(BarrierOrigin.ScenePosition);
+                    FoundOurPlayer = true;
+                    return true;
+                }
             }
-            else
+            // Handle other players, and send respective repositioning for their clients.
+            if (player == null)
+                throw new NullReferenceException("player is null");
+            if (player.connectionToServer == null)
             {
-                if (player == null)
-                    throw new NullReferenceException("player is null");
-                if (player.connectionToServer == null)
-                    throw new NullReferenceException("player.connectionToServer is null");
-                return moveLimCall.TryBroadcastTarget(new WorldPositionMessage() { m_Position = WP }, player);
+                if (ManNetwork.inst.MyPlayer != null)
+                    DebugBeS.Assert("Player " + player.name + " added but isn't connected to server?!  Also our server doesn't have a player yet somehow...");
+                    //throw new NullReferenceException("player.connectionToServer is null for player " + player.name);
+                else
+                    DebugBeS.Assert("Player " + player.name + " added but isn't connected to server?!");
+                // Else this is our first setup, so we ignore.
             }
+            return moveLimCall.TryBroadcastTarget(new WorldPositionMessage() { m_Position = WP }, player);
         }
         private static bool OnMoveLimiterNetwork(WorldPositionMessage command, bool isServer)
         {
             DebugBeS.Log("Set clientside barrier to " + command.m_Position.TileCoord);
             BarrierOrigin = command.m_Position;
+            Singleton.Manager<UIMPChat>.inst.AddMissionMessage("Client barrier set " + BarrierOrigin.TileCoord);
             MovePushbackBarrierClient(BarrierOrigin.ScenePosition);
             FoundOurPlayer = true;
             return true;

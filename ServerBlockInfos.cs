@@ -26,12 +26,7 @@ namespace Better_Servers
         public int CabInfractionSeverity = 1;
 
         // Stores Steam IDs that normally don't change with account name changes.  Does not block by IP.
-        public Dictionary<string, PlayerHistory> userInfractionsHost = new Dictionary<string, PlayerHistory>();
+        public Dictionary<string, BetterServerPlayer> userInfractionsHost = new Dictionary<string, BetterServerPlayer>();
     }
 
-    public class PlayerHistory
-    {
-        string name;
-        int infractionCount;
-    }
 }

@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
-using UnityEngine;
-using UnityEngine.Networking;
-using TerraTech.Network;
-using HarmonyLib;
 using System.Runtime.Serialization.Formatters;
+using System.Text;
+using FMOD;
+using HarmonyLib;
+using TerraTech.Network;
 using TerraTechETCUtil;
+using UnityEngine;
 using UnityEngine.Assertions.Must;
+using UnityEngine.Networking;
+using static CompoundExpression;
 using static MapGenerator;
 
 namespace Better_Servers
@@ -71,20 +73,9 @@ namespace Better_Servers
                 return true;
             }
         }*/
-        [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCreative>))]
-        [HarmonyPatch("GetTargetScenePosition")]
-        internal static class OnGenerateTetherOriginAddFakeIfNeeded
-        {
-            internal static void Postfix(ref WorldPosition __result)
-            {
-                if (!MPKingdomsTest.FakePlayerOrigin)
-                    return;
-                int numPlay = Singleton.Manager<ManNetwork>.inst.GetNumPlayers();
-                Vector3 worldPos = __result.GameWorldPosition;
-                worldPos *= ((float)numPlay / (numPlay + 1));
-                __result = WorldPosition.FromGameWorldPosition(worldPos);
-            }
-        }
+
+
+
         [HarmonyPatch(typeof(WorldPushbackBarrier))]
         [HarmonyPatch("Update")]
         internal static class DisableGlobalAnchoredPushback
@@ -94,52 +85,95 @@ namespace Better_Servers
                 return !MPKingdomsTest.AreWeKingdoming;
             }
         }
+
+
+        // Functions that are specific
+        private static void FakeTetherTest(ref WorldPosition __result)
+        {
+            if (!MPKingdomsTest.FakePlayerOrigin)
+                return;
+            int numPlay = Singleton.Manager<ManNetwork>.inst.GetNumPlayers();
+            Vector3 worldPos = __result.GameWorldPosition;
+            worldPos *= ((float)numPlay / (numPlay + 1));
+            __result = WorldPosition.FromGameWorldPosition(worldPos);
+        }
+
+        [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCreative>))]
+        [HarmonyPatch("GetTargetScenePosition")]
+        internal static class OnGenerateTetherOriginAddFakeIfNeeded
+        {
+            internal static void Postfix(ref WorldPosition __result)
+            {
+                FakeTetherTest(ref __result);
+            }
+        }
+        [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCampaign>))]
+        [HarmonyPatch("GetTargetScenePosition")]
+        internal static class OnGenerateTetherOriginAddFakeIfNeeded2
+        {
+            internal static void Postfix(ref WorldPosition __result)
+            {
+                FakeTetherTest(ref __result);
+            }
+        }
+        private static void GetBarriers<T>(ModeCoOp<T> __instance) where T : ModeCoOp<T>
+        {
+            object obj = __instance;
+            MPKingdomsTest.GlobalBarrierVisual = (Transform)typeof(ModeCoOp<T>).
+                GetField("m_SpawnedBoundaryObject", BindingFlags.NonPublic | BindingFlags.Instance).
+                GetValue(__instance);
+            MPKingdomsTest.BarrierPrefab = (Transform)typeof(ModeCoOp<T>).
+                GetField("m_BoundaryEdgePrefab", BindingFlags.NonPublic | BindingFlags.Instance).
+                GetValue(__instance);
+            if (MPKingdomsTest.GlobalBarrierVisual != null)
+                DebugBeS.Assert("Found BarrierVisual");
+        }
         [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCreative>))]
         [HarmonyPatch("CreateBoundaryMesh")]
         internal static class GrabTheBoundryVisualsEffect
         {
             internal static void Postfix(ModeCoOp<ModeCoOpCreative> __instance)
             {
-                object obj = __instance;
-                if (obj is ModeCoOp<ModeCoOpCampaign> campaign)
-                {
-                    MPKingdomsTest.GlobalBarrierVisual = (Transform)typeof(ModeCoOp<ModeCoOpCampaign>).
-                        GetField("m_SpawnedBoundaryObject", BindingFlags.NonPublic | BindingFlags.Instance).
-                        GetValue(campaign);
-                    MPKingdomsTest.BarrierPrefab = (Transform)typeof(ModeCoOp<ModeCoOpCampaign>).
-                        GetField("m_BoundaryEdgePrefab", BindingFlags.NonPublic | BindingFlags.Instance).
-                        GetValue(campaign);
-                    if (MPKingdomsTest.GlobalBarrierVisual != null)
-                        DebugBeS.Assert("Found BarrierVisual");
-                }
-                else
-                {
-                    MPKingdomsTest.GlobalBarrierVisual = (Transform)typeof(ModeCoOp<ModeCoOpCreative>).
-                        GetField("m_SpawnedBoundaryObject", BindingFlags.NonPublic | BindingFlags.Instance).
-                        GetValue(__instance);
-                    MPKingdomsTest.BarrierPrefab = (Transform)typeof(ModeCoOp<ModeCoOpCreative>).
-                        GetField("m_BoundaryEdgePrefab", BindingFlags.NonPublic | BindingFlags.Instance).
-                        GetValue(__instance);
-                    if (MPKingdomsTest.GlobalBarrierVisual != null)
-                        DebugBeS.Assert("Found BarrierVisual");
-                }
+                GetBarriers(__instance);
+            }
+        }
+        [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCampaign>))]
+        [HarmonyPatch("CreateBoundaryMesh")]
+        internal static class GrabTheBoundryVisualsEffect2
+        {
+            internal static void Postfix(ModeCoOp<ModeCoOpCampaign> __instance)
+            {
+                GetBarriers(__instance);
+            }
+        }
+        private static void ExtendAll()
+        {
+            //DebugBeS.Log("ModeCoOp<>.GenerateTerrain");
+            if (ManGameMode.inst.IsCurrent<ModeCoOpCreative>())
+            {
+                MPKingdomsTest.ExtendAll<ModeCoOpCreative>(ManGameMode.inst.AllModes.First(x => x is ModeCoOpCreative));
+            }
+            if (ManGameMode.inst.IsCurrent<ModeCoOpCampaign>())
+            {
+                MPKingdomsTest.ExtendAll<ModeCoOpCampaign>(ManGameMode.inst.AllModes.First(x => x is ModeCoOpCampaign));
             }
         }
         [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCreative>))]
         [HarmonyPatch("GenerateTerrain")]
-        internal static class OnGenerateTerrainMakeAlterations
+        internal static class OnGenerateTerrainExtendGeneration
         {
             internal static void Postfix()
             {
-                //DebugBeS.Log("ModeCoOp<>.GenerateTerrain");
-                if (ManGameMode.inst.IsCurrent<ModeCoOpCreative>())
-                {
-                    MPKingdomsTest.ExtendAll<ModeCoOpCreative>(ManGameMode.inst.AllModes.First(x => x is ModeCoOpCreative));
-                }
-                if (ManGameMode.inst.IsCurrent<ModeCoOpCampaign>())
-                {
-                    MPKingdomsTest.ExtendAll<ModeCoOpCampaign>(ManGameMode.inst.AllModes.First(x => x is ModeCoOpCampaign));
-                }
+                ExtendAll();
+            }
+        }
+        [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCampaign>))]
+        [HarmonyPatch("GenerateTerrain")]
+        internal static class OnGenerateTerrainExtendGeneration2
+        {
+            internal static void Postfix()
+            {
+                ExtendAll();
             }
         }
 
@@ -324,17 +358,17 @@ namespace Better_Servers
                     DebugBeS.Log("Player " + NP.name);
                     int infractionCount = KickStartBetterServers.OnTechSpawn(__instance, __instance.NetPlayer);
                     if (BetterServerPlayer.GivePlayerInfractions(__instance.NetPlayer, infractionCount))
-                    {
+                    {   // Player has exceeded "KickStartBetterServers.blockedInfo.maxInfractionLimit" and now they shall be kicked
                         PersistentPlayerID playerRealID = MPKingdomsTest.GetPlayerID(NP);
                         DebugBeS.Log("Infraction - player Tech does not abide by the rules set");
                         if (KickStartBetterServers.blockedInfo.AutoBlock)
-                        {
+                        {   // Kick and ban immedeately as well
                             if (!ManNetworkLobby.inst.LobbySystem.BanList.IsPlayerBanned(playerRealID))
                                 ManNetworkLobby.inst.LobbySystem.CurrentLobby.BanPlayer(NP.GetPlayerIDInLobby());
                             else
                             {
                                 KickStartBetterServers.ChatLog("User " + (NP.name.NullOrEmpty() ? "NULL NAME" : NP.name) +
-                                    " has evaded the auto-block system, please notify the devs to fix this issue ASAP.");
+                                    " has evaded the vanilla ban system, please notify the devs to fix this issue ASAP.");
                                 DebugBeS.Log("Vanilla has failed us, time to brute-force eject kick them!");
                                 try
                                 {

@@ -1,19 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using TerraTech.Network;
 
 namespace Better_Servers
 {
-    internal class BetterServerPlayer
+    public class BetterServerPlayer
     {
+        [JsonIgnore]
         internal NetPlayer Player;
-        internal int InfractionCount = 0;
+        /// <summary> Not accurate as they can change usernames.  They will still be blocked by Steam ID though. </summary>
+        public string name;
+        public int InfractionCount = 0;
 
         private static Dictionary<PersistentPlayerID,BetterServerPlayer> players = new Dictionary<PersistentPlayerID, BetterServerPlayer>();
 
+        /// <summary>
+        /// SERIALIZATION ONLY
+        /// </summary>
+        public BetterServerPlayer()
+        { 
+        }
         internal BetterServerPlayer(NetPlayer player)
         {
             Player = player;
+            this.name = player.name;
         }
 
         internal static BetterServerPlayer GetPlayer(NetPlayer player)
@@ -21,7 +32,10 @@ namespace Better_Servers
             PersistentPlayerID id = ManNetworkLobby.inst.LobbySystem.GetPersistentPlayerID(player.GetPlayerIDInLobby());
             BetterServerPlayer found;
             if (players.TryGetValue(id, out found))
+            {
+                found.name = player.name;
                 return found;
+            }
             found = new BetterServerPlayer(player);
             players.Add(id, found);
             return found;

@@ -11,7 +11,7 @@ namespace Better_Servers
 {
     public class UIScoreboardEntryExt : MonoBehaviour
     {
-        public PlayerHistory infractions;
+        public BetterServerPlayer infractions;
         public static void Insure(UIScoreBoardEntry entry, NetPlayer player, UIScoreBoardHUD scoreboard)
         {
             if (entry == null)
@@ -23,13 +23,12 @@ namespace Better_Servers
                 ext = entry.gameObject.AddComponent<UIScoreboardEntryExt>();
             }
             string ID = ManNetworkLobby.inst.LobbySystem.GetPersistentPlayerID(player.GetPlayerIDInLobby()).ToString();
-            if (!KickStartBetterServers.blockedInfo.userInfractionsHost.TryGetValue(ID, out var PIH))
+            if (!KickStartBetterServers.blockedInfo.userInfractionsHost.TryGetValue(ID, out var BSP))
             {
-                PIH = new PlayerHistory();
-                KickStartBetterServers.blockedInfo.userInfractionsHost.Add(ID, PIH);
+                BSP = BetterServerPlayer.GetPlayer(player);
+                KickStartBetterServers.blockedInfo.userInfractionsHost.Add(ID, BSP);
             }
-            ext.infractions = PIH;
-
+            ext.infractions = BSP;
         }
     }
 }
