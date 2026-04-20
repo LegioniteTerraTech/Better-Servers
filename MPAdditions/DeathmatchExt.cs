@@ -1044,7 +1044,6 @@ namespace Better_Servers
             }
             List<BlockCount> BC = new List<BlockCount>();
             BlockTypes batching = BlockTypes.GSOAIController_111;
-            BlockCount prevC = null;
             foreach (var item in group.Distinct())
             {
                 batching = item;

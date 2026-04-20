@@ -56,7 +56,7 @@ namespace Better_Servers
                 }
                 return true;
             }
-            internal static bool CanPlayerChangeTech_Prefix(NetPlayer player, ref bool __result)
+            internal static bool CanPlayerChangeTech_Prefix(ref bool __result)
             {
                 if (!MPKingdomsTest.AreWeKingdoming)
                     return true;

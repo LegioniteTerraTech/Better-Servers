@@ -49,7 +49,6 @@ namespace Better_Servers
 
         private static KeyCode BanButton = KeyCode.N;
         private static bool isInit = false;
-        private static bool firstInit = false;
         internal static ServerBlockInfos blockedInfo = new ServerBlockInfos();
 
         internal static string DLLDirectory;
@@ -166,7 +165,6 @@ namespace Better_Servers
             harmonyInst.Unpatch(targetMethod2, HarmonyPatchType.Prefix, harmonyInst.Id);
         }
 
-        private static ManToolbar.ToolbarToggle BanListToggle;
         private void ModeSwitchEvent(Mode mode)
         {
             MPKingdomsTest.OnSwitchMode(mode);
@@ -220,10 +218,10 @@ namespace Better_Servers
                 }
                 catch { }
             }
+            ManSafeSaves.RegisterSaveSystem(Assembly.GetExecutingAssembly(), OnSaveManagers, OnLoadManagers);
             ManWorldTileExt.InsureInit();
             BlockIndexer.ConstructBlockLookupListDelayed();
             DeathmatchExt.SetReady();
-            ManSafeSaves.RegisterSaveSystem(Assembly.GetExecutingAssembly(), OnSaveManagers, OnLoadManagers);
             MPKingdomsTest.InitHooks();
 
             MassPatcher.MassPatchAllWithin(harmonyInst, typeof(MPKingdomsPatches), ModID);
@@ -231,8 +229,8 @@ namespace Better_Servers
         private void MainDeInit()
         {
             DeInitSpecialPatch();
-            MassPatcher.MassUnPatchAllWithin(harmonyInst, typeof(MPKingdomsPatches), ModID);
             ManSafeSaves.UnregisterSaveSystem(Assembly.GetExecutingAssembly(), OnSaveManagers, OnLoadManagers);
+            MassPatcher.MassUnPatchAllWithin(harmonyInst, typeof(MPKingdomsPatches), ModID);
             ManGameMode.inst.ModeFinishedEvent.Unsubscribe(ModeEndEvent);
             ManGameMode.inst.ModeStartEvent.Unsubscribe(ModeSwitchEvent);
             //ManPointer.inst.MouseEvent.Unsubscribe(OnTechSelect);
@@ -428,6 +426,16 @@ namespace Better_Servers
                 throw new InvalidOperationException("Called IsHost() on non-host");
             return ManNetwork.inst.MyPlayer == offendingPlayer;
         }
+
+        internal static string SendChatOurClientOnly(string chatMsg)
+        {
+            try
+            {
+                Singleton.Manager<UIMPChat>.inst.AddMissionMessage("[CLIENT] " + chatMsg);
+            }
+            catch { }
+            return chatMsg;
+        }
         [Server]
         internal static string SendChatServer(string chatMsg)
         {
@@ -437,7 +445,7 @@ namespace Better_Servers
                     Singleton.Manager<ManNetworkLobby>.inst.LobbySystem.CurrentLobby.SendChat("[SERVER] " + chatMsg, -1, ManNetwork.inst.MyPlayer.netId.Value);
                 else
                 {
-                    Singleton.Manager<UIMPChat>.inst.AddMissionMessage("[CLIENT] " + chatMsg);
+                    SendChatOurClientOnly(chatMsg);
                     DebugBeS.Assert("Called SendChatServer() on non-host, only client will see this!!!");
                 }
             }

@@ -26,22 +26,27 @@ namespace Better_Servers
 
     public abstract class MPTeamSaveData
     {
-        public int BuildBucks { get; }
+        public abstract int BuildBucks { get; }
 
-        public IInventory<BlockTypes> Inventory { get; }
+        public abstract IInventory<BlockTypes> Inventory { get; }
     }
     public class MPTeamSaveDataHost : MPTeamSaveData
     {
-        public int BuildBucks { get => ManPlayer.inst.GetCurrentMoney(); }
+        public override int BuildBucks { get => ManPlayer.inst.GetCurrentMoney(); }
 
-        public IInventory<BlockTypes> Inventory { get => ManPurchases.inst.GetInventory(); }
+        public override IInventory<BlockTypes> Inventory { get => ManPurchases.inst.GetInventory(); }
     }
+
+    /// <summary>
+    /// This MUST be serialized
+    /// </summary>
+    [Serializable]
     public class MPTeamSaveDataNonHost : MPTeamSaveData
     {
-        public int BuildBucks { get => buildBucks; }
+        public override int BuildBucks { get => buildBucks; }
         public int buildBucks = 0;
 
-        public IInventory<BlockTypes> Inventory { get => inventory; }
+        public override IInventory<BlockTypes> Inventory { get => inventory; }
         public IInventory<BlockTypes> inventory;
     }
 }

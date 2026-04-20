@@ -107,6 +107,7 @@ namespace Better_Servers
                 FakeTetherTest(ref __result);
             }
         }
+
         [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCampaign>))]
         [HarmonyPatch("GetTargetScenePosition")]
         internal static class OnGenerateTetherOriginAddFakeIfNeeded2
@@ -116,25 +117,30 @@ namespace Better_Servers
                 FakeTetherTest(ref __result);
             }
         }
-        private static void GetBarriers<T>(ModeCoOp<T> __instance) where T : ModeCoOp<T>
-        {
-            object obj = __instance;
-            MPKingdomsTest.GlobalBarrierVisual = (Transform)typeof(ModeCoOp<T>).
-                GetField("m_SpawnedBoundaryObject", BindingFlags.NonPublic | BindingFlags.Instance).
-                GetValue(__instance);
-            MPKingdomsTest.BarrierPrefab = (Transform)typeof(ModeCoOp<T>).
-                GetField("m_BoundaryEdgePrefab", BindingFlags.NonPublic | BindingFlags.Instance).
-                GetValue(__instance);
-            if (MPKingdomsTest.GlobalBarrierVisual != null)
-                DebugBeS.Assert("Found BarrierVisual");
-        }
+
         [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCreative>))]
         [HarmonyPatch("CreateBoundaryMesh")]
         internal static class GrabTheBoundryVisualsEffect
         {
             internal static void Postfix(ModeCoOp<ModeCoOpCreative> __instance)
             {
-                GetBarriers(__instance);
+                Type baseType = __instance.GetType().BaseType;
+                /*
+                DebugBeS.Warning("- " + __instance.GetType().Name);
+                DebugBeS.Warning("- " + __instance.GetType().BaseType.Name);
+                DebugBeS.Warning("- " + __instance.GetType().BaseType.BaseType.Name);//*/
+
+                MPKingdomsTest.GlobalBarrierVisual = (Transform)__instance.GetType().BaseType.
+                    GetField("m_SpawnedBoundaryObject", BindingFlags.NonPublic | BindingFlags.Instance).
+                    GetValue(__instance);
+                MPKingdomsTest.BarrierPrefab = (Transform)baseType.
+                    GetField("m_BoundaryEdgePrefab", BindingFlags.NonPublic | BindingFlags.Instance).
+                    GetValue(__instance);
+
+                if (MPKingdomsTest.GlobalBarrierVisual != null)
+                {
+                    //DebugBeS.Assert("Found BarrierVisual");
+                }
             }
         }
         [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCampaign>))]
@@ -143,7 +149,23 @@ namespace Better_Servers
         {
             internal static void Postfix(ModeCoOp<ModeCoOpCampaign> __instance)
             {
-                GetBarriers(__instance);
+                Type baseType = __instance.GetType().BaseType;
+                /*
+                DebugBeS.Warning("- " + __instance.GetType().Name);
+                DebugBeS.Warning("- " + __instance.GetType().BaseType.Name);
+                DebugBeS.Warning("- " + __instance.GetType().BaseType.BaseType.Name);//*/
+
+                MPKingdomsTest.GlobalBarrierVisual = (Transform)baseType.
+                    GetField("m_SpawnedBoundaryObject", BindingFlags.NonPublic | BindingFlags.Instance).
+                    GetValue(__instance);
+                MPKingdomsTest.BarrierPrefab = (Transform)baseType.
+                    GetField("m_BoundaryEdgePrefab", BindingFlags.NonPublic | BindingFlags.Instance).
+                    GetValue(__instance);
+
+                if (MPKingdomsTest.GlobalBarrierVisual != null)
+                {
+                    //DebugBeS.Assert("Found BarrierVisual");
+                }
             }
         }
         private static void ExtendAll()
@@ -151,11 +173,11 @@ namespace Better_Servers
             //DebugBeS.Log("ModeCoOp<>.GenerateTerrain");
             if (ManGameMode.inst.IsCurrent<ModeCoOpCreative>())
             {
-                MPKingdomsTest.ExtendAll<ModeCoOpCreative>(ManGameMode.inst.AllModes.First(x => x is ModeCoOpCreative));
+                MPKingdomsTest.ExtendAllBoundries<ModeCoOpCreative>(ManGameMode.inst.AllModes.First(x => x is ModeCoOpCreative));
             }
             if (ManGameMode.inst.IsCurrent<ModeCoOpCampaign>())
             {
-                MPKingdomsTest.ExtendAll<ModeCoOpCampaign>(ManGameMode.inst.AllModes.First(x => x is ModeCoOpCampaign));
+                MPKingdomsTest.ExtendAllBoundries<ModeCoOpCampaign>(ManGameMode.inst.AllModes.First(x => x is ModeCoOpCampaign));
             }
         }
         [HarmonyPatch(typeof(ModeCoOp<ModeCoOpCreative>))]
@@ -191,7 +213,7 @@ namespace Better_Servers
                     // Removes the load areas from loading
                     if (TileLookup == null)
                         TileLookup = (Dictionary<IntVector2, WorldTile>)TileLookupGet.GetValue(__instance);
-                    if (MPKingdomsTest.FoundOurPlayer)
+                    if (MPKingdomsTest.FoundOurLocalPlayer)
                     {
                         if (TileLookup.Count == 0 && !__instance.IsClearing)
                         {
@@ -292,7 +314,7 @@ namespace Better_Servers
                     return false;
                 }
                 */
-                MPKingdomsTest.OnPlayerJoined(__instance);
+                MPKingdomsTest.OnPlayerJoined_SERVER(__instance);
                 BetterServerPlayer.GetPlayer(player);
                 return true;
             }
@@ -314,6 +336,8 @@ namespace Better_Servers
                     return true;
                 }
                 DebugBeS.Log("OnStartClient for " + player.name);
+                if (!ManNetwork.IsHost)
+                    MPKingdomsTest.OnPlayerJoined_CLIENT(__instance);
                 KickStartBetterServers.ProtectedServerDelay();
                 return true;
             }
@@ -336,10 +360,17 @@ namespace Better_Servers
         {
             internal static void Prefix(ManNetwork __instance, ref NetPlayer player)
             {
-                if (player == null || !ManNetwork.IsHost)
+                if (player == null)
                     return;
-                KickStartBetterServers.OnPlayerDisconnect(player);
-                MPKingdomsTest.OnPlayerLeft(player);
+                if (ManNetwork.IsHost)
+                {
+                    KickStartBetterServers.OnPlayerDisconnect(player);
+                    MPKingdomsTest.OnPlayerLeft_SERVER(player);
+                }
+                else
+                {
+                    MPKingdomsTest.OnPlayerLeft_CLIENT(player);
+                }
             }
         }
 
@@ -460,7 +491,6 @@ namespace Better_Servers
         [HarmonyPatch("Update")]//
         private class DeathmatchChoicesMultiMenu
         {
-            private static bool setup = false;
             internal static void Postfix(UIScreenMultiplayerTechSelect __instance)
             {
                 /*

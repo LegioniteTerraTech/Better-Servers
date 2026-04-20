@@ -57,7 +57,7 @@ namespace Better_Servers
         }
         internal static void SetHost(UIScreenNetworkLobby __instance, bool isHost)
         {
-            DebugBeS.Log("SetHost called");
+            //DebugBeS.Log("SetHost called");
             InsureChanges(__instance);
             toggleFortress.interactable = isHost;
         }
@@ -69,13 +69,13 @@ namespace Better_Servers
 
         public static void ModLobby(UIScreenNetworkLobby __instance)
         {
-            DebugBeS.Log("ModLobby called");
+            //DebugBeS.Log("ModLobby called");
             InsureChanges(__instance);
             toggleFortress.onValueChanged.AddListener(new UnityAction<bool>(SetFortressMode));
         }
         public static void ModLobbyEnd(UIScreenNetworkLobby __instance)
         {
-            DebugBeS.Log("ModLobbyEnd called");
+            //DebugBeS.Log("ModLobbyEnd called");
             InsureChanges(__instance);
             toggleFortress.onValueChanged.RemoveListener(new UnityAction<bool>(SetFortressMode));
         }
