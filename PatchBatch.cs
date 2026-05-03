@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using FMOD;
 using HarmonyLib;
 using TerraTech.Network;
 using TerraTechETCUtil;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using UnityEngine.Networking;
-using static CompoundExpression;
-using static MapGenerator;
 
 namespace Better_Servers
 {
@@ -213,7 +206,7 @@ namespace Better_Servers
                     // Removes the load areas from loading
                     if (TileLookup == null)
                         TileLookup = (Dictionary<IntVector2, WorldTile>)TileLookupGet.GetValue(__instance);
-                    if (MPKingdomsTest.FoundOurLocalPlayer)
+                    if (MPKingdomsTest.FoundOurLocalPlayerTimer >= MPKingdomsTest.FoundOurLocalPlayerTimerEnd)
                     {
                         if (TileLookup.Count == 0 && !__instance.IsClearing)
                         {

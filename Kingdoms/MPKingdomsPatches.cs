@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using static ModeAttract;
-using static SpawnList;
 
 namespace Better_Servers
 {
@@ -52,7 +46,11 @@ namespace Better_Servers
                 if (MPKingdomsTest.TryGetPlayer(player, out var playerData))
                 {
                     //DebugBeS.Log("Waiting on tech search for " + player.name);
-                    return playerData.GaveUpOnTechSearch;
+                    if (!player.HasTech() && playerData.ShouldGiveUpOnTechSearch)
+                    {
+                        //ManUI.inst.ShowErrorPopup("Gave up on tech search for " + player.name);
+                    }
+                    return playerData.ShouldGiveUpOnTechSearch;
                 }
                 return true;
             }
@@ -116,6 +114,7 @@ namespace Better_Servers
                 {
                     techData = (TechData)getWaveTech.Invoke(__instance, paraWaveTech);
                     spawnRadiusMin = (float)paraWaveTech[0];
+                    spawnRadiusMax = (float)paraWaveTech[1];
                     spawnRadiusMax = (float)paraWaveTech[1];
                 }
                 if (techData != null)

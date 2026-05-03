@@ -435,35 +435,6 @@
             <param name="ToColor">string to color</param>
             <returns>the given string with the color formatting around it</returns>
         </member>
-        <member name="T:TerraTechETCUtil.GameObjectDocumentator">
-            <summary>
-            Documents <see cref="T:UnityEngine.GameObject"/>s.
-            <para>Also see <seealso cref="T:TerraTechETCUtil.AutoDocumentator"/> and <seealso cref="T:TerraTechETCUtil.Utilities"/></para>
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.GameObjectDocumentator.GetHierachyAndPrintToLog(UnityEngine.GameObject,System.Int32,TerraTechETCUtil.SlashState,System.Boolean)">
-            <summary>
-            Logs the target <see cref="T:UnityEngine.GameObject"/>'s hierarchy to <b>output_log.txt</b> at <see cref="P:UnityEngine.Application.consoleLogPath"/>
-            <para>For a the <see cref="T:UnityEngine.Component"/> version, see <seealso cref="M:TerraTechETCUtil.Utilities.PrintAllComponentsGameObjectDepth``1(UnityEngine.GameObject)"/></para>
-            <para>For a more <b>precise</b> version, see <seealso cref="T:TerraTechETCUtil.AutoDocumentator"/></para>
-            </summary>
-            <param name="targetBaseGameObject">The <see cref="T:UnityEngine.GameObject"/> to get from</param>
-            <param name="tabs">Offset number of tabs to apply to the extracted data</param>
-            <param name="slash">set to <b><see cref="F:TerraTechETCUtil.SlashState.Slash"/></b> if we should add slashes to the ends</param>
-            <param name="GetComponentsToo">Set this to true to also get the attached <see cref="T:UnityEngine.Component"/>s</param>
-        </member>
-        <member name="M:TerraTechETCUtil.GameObjectDocumentator.GetStrings(UnityEngine.GameObject,System.Text.StringBuilder,System.Int32,TerraTechETCUtil.SlashState,System.Boolean)">
-            <summary>
-            Logs the target <see cref="T:UnityEngine.GameObject"/>'s hierarchy into the given <see cref="T:System.Text.StringBuilder"/>
-            <para>For the <see cref="T:UnityEngine.Component"/> version, see <seealso cref="M:TerraTechETCUtil.Utilities.PrintAllComponentsGameObjectDepth``1(UnityEngine.GameObject)"/></para>
-            <para>For a more <b>precise</b> version, see <seealso cref="T:TerraTechETCUtil.AutoDocumentator"/></para>
-            </summary>
-            <param name="targetBaseGameObject">The <see cref="T:UnityEngine.GameObject"/> to get from</param>
-            <param name="SB">Inserts the data into this</param>
-            <param name="tabs">Offset number of tabs to apply to the extracted data</param>
-            <param name="slash">set to <b><see cref="F:TerraTechETCUtil.SlashState.Slash"/></b> if we should add slashes to the ends</param>
-            <param name="GetComponentsToo">Set this to true to also get the attached <see cref="T:UnityEngine.Component"/>s</param>
-        </member>
         <member name="T:TerraTechETCUtil.ModDataHandle">
             <summary>
             Keeps track of mod data for easy comperisons and access
@@ -1351,41 +1322,6 @@
         </member>
         <member name="M:TerraTechETCUtil.ListHashSet`1.ListHashSetSorting`1.ToList">
             <inheritdoc/>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityButtonPatches.OnPointerClick_Prefix">
-            <summary>
-            DontClickTheButtonWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityDropdownPatches.OnPointerClick_Prefix">
-            <summary>
-            DontClickTheDropdownWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityInputFieldPatches.OnPointerClick_Prefix">
-            <summary>
-            DontClickTheInputFieldWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySelectablePatches.OnPointerDown_Prefix">
-            <summary>
-            DontClickTheSelectableWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollbarPatches.OnPointerDown_Prefix">
-            <summary>
-            DontClickTheScrollbarWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySliderPatches.OnPointerDown_Prefix">
-            <summary>
-            DontClickTheSliderWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityTogglePatches.OnPointerClick_Prefix">
-            <summary>
-            DontClickTheToggleWhenIAmOverIMGUI
-            </summary>
         </member>
         <member name="T:TerraTechETCUtil.RawTechUtil">
             <summary>
@@ -2799,10 +2735,622 @@
         <member name="F:TerraTechETCUtil.Debug_TTExt.ShouldLogBiomeGen">
             <summary> log for <b>ManWorldGeneratorExt</b> </summary>
         </member>
+        <member name="T:TerraTechETCUtil.LocHelper">
+            <summary>
+            Stores all of the localized text
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.LocHelper.LOC_GENERAL_HINT">
+            <summary>
+            Localisation
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.LocHelper.LOC_TRAIN_HINT">
+            <summary>
+            Localisation
+            </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.ExtModuleClickable">
+            <summary>
+            <inheritdoc cref="T:TerraTechETCUtil.ExtModule"/>
+            <para>For modules that open the modal menu</para>
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.OnClick(System.Boolean,System.Boolean,UnityEngine.RaycastHit)">
+            <summary>
+            When it is clicked
+            </summary>
+            <param name="RMB"></param>
+            <param name="down"></param>
+            <param name="rayman"></param>
+        </member>
+        <member name="F:TerraTechETCUtil.ExtModuleClickable.UseClick">
+            <summary>
+            Use the click mouse menu
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExtModuleClickable.Pooled">
+            <summary>
+            If this instance is pooled
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ExtModuleClickable.UseDefault">
+            <summary>
+            Use the vanilla modal menu
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.PoolInsure">
+            <summary>
+            Insure that we are pooled
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.CanOpenMenu(System.Boolean)">
+            <summary>
+            Check to see if the menu can be opened
+            </summary>
+            <param name="radial"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.OnOpenMenuEvent(OpenMenuEventData)">
+            <summary>
+            Impossible to figure out why it's soo slow - OnOpenMenuEvent is delayed for non-native DLLs and I can't find any reason for it to do so.
+            </summary>
+            <param name="OMED"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.ShowDelayedNoCheck">
+            <summary>
+            Show this on the UI modal
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.OnShow">
+            <summary>
+            Invoked when the modal is shown
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.MakeElement(System.String,System.Func{System.Single,System.Single},System.Func{UnityEngine.Sprite},System.Func{System.String},System.Int32)">
+            <summary>
+            Create a new <see cref="T:TerraTechETCUtil.GUI_BM_Element"/>
+            </summary>
+            <param name="Name">Name of the element to display on UI</param>
+            <param name="onTriggered">Gives a float which can be processed into a set value for the element return on the ui, which is in range [0 ~ 1]</param>
+            <param name="sprite">Sprite icon to use for it</param>
+            <param name="sliderDescIfIsSlider">Name for the slider if this has one</param>
+            <param name="numClampSteps">Number of positions the slider can take</param>
+            <returns>The new element</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.MakeElement(TerraTechETCUtil.LocExtString,System.Func{System.Single,System.Single},System.Func{UnityEngine.Sprite},System.Func{System.String},System.Int32)">
+            <inheritdoc cref="M:TerraTechETCUtil.ExtModuleClickable.MakeElement(System.String,System.Func{System.Single,System.Single},System.Func{UnityEngine.Sprite},System.Func{System.String},System.Int32)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.ExtModuleClickable.MakeElement(System.Func{System.String},System.Func{System.Single,System.Single},System.Func{UnityEngine.Sprite},System.Func{System.String},System.Int32)">
+            <inheritdoc cref="M:TerraTechETCUtil.ExtModuleClickable.MakeElement(System.String,System.Func{System.Single,System.Single},System.Func{UnityEngine.Sprite},System.Func{System.String},System.Int32)"/>
+        </member>
+        <member name="T:TerraTechETCUtil.ManMinimapExt">
+            <summary>
+            Manages custom minimap elements and drag-selection for more options
+            <para><b>INSURE YOU CALL <see cref="M:TerraTechETCUtil.LegModExt.InsurePatches"/> BEFORE USING</b></para>
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManMinimapExt.Enabled">
+            <summary>
+            If this is allowed to apply it's changes to the UI
+            <para>See <see cref="M:TerraTechETCUtil.ManMinimapExt.DeInitAll"/> to remove the instance</para>
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManMinimapExt.PermitPlayerMapJumpInAllNonMPModes">
+            <summary>
+            Allow the player to swap techs from anywhere in the world using the map
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManMinimapExt.VanillaMapIconCount">
+            <summary>
+            Existing vanilla <see cref="T:ManRadar.IconType"/> count
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManMinimapExt.AddedMinimapIndexes">
+            <summary>
+            The count of minimaps that were added
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManMinimapExt.iconConditions">
+            <summary>
+            Tracking of the icons on the map
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManMinimapExt.addedIcons">
+            <summary>
+            New icons added
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManMinimapExt.MiniMapElementSelectEvent">
+            <summary>
+            Assign your event popup when a minimap element is selected.
+            <para>VisibleID, <see cref="T:UIMiniMapElement"/> instance</para>
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManMinimapExt.WorldMapActive">
+            <summary>
+            The player is looking at the world map
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.DeInitAll">
+            <summary>
+            Forcibly removes this from the minimap system.
+            <para>See <see cref="F:TerraTechETCUtil.ManMinimapExt.Enabled"/> to toggle it off entirely</para>
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManMinimapExt.LastModaledTarget">
+            <summary>
+            Last <see cref="T:UIMiniMapElement"/> we opened the modal on
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManMinimapExt.ModaledSelectTarget">
+            <summary>
+            Current <see cref="T:UIMiniMapElement"/> we opened the modal on
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.AddMinimapLayer(System.Type,System.Int32)">
+            <summary>
+            Add a new Minimap layer to the map
+            </summary>
+            <param name="layerToAdd"></param>
+            <param name="priority">Higher priorities (int is less) display over lower priorites (int is more)</param>
+            <returns>True if added</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.RemoveMinimapLayer(System.Type,System.Int32)">
+            <summary>
+            Remove a Minimap layer from the map
+            </summary>
+            <param name="layerToRemove"></param>
+            <param name="priority">Higher priorities (int is less) display over lower priorites (int is more)</param>
+            <returns>True if removed</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.RebuildClosestIcons">
+            <summary>
+             MIGHT BE SLOW - CHECK!!!!
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.AddCustomMinimapTechIconType(System.Func{TrackedVisible,System.Boolean},UnityEngine.Sprite,UnityEngine.Color,System.Boolean,System.Int32,System.Single)">
+            <summary>
+            YOU MUST CALL THIS BEFORE ANYTHING INITS
+            </summary>
+            <param name="ShouldShow"></param>
+            <param name="texture"></param>
+            <param name="color"></param>
+            <param name="visibleBeyondMapBorder"></param>
+            <param name="maxCountVisibleBeyondMapBorder"></param>
+            <param name="visiblePriority"></param>
+            <returns>0 if failed, otherwise a non-zero value that is the RadarType it is assigned to</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.AddMinimapInteractable(ObjectTypes,System.String,System.Func{UIMiniMapElement,System.Boolean},System.Func{System.Single,System.Single},System.Func{UnityEngine.Sprite},System.Func{System.String},System.Int32)">
+            <summary>
+            Add a custom modal menu for an interactable on the minimap
+            <para>Call <see cref="M:TerraTechETCUtil.ManMinimapExt.UpdateAllMaps"/> after you are fully done with this</para>
+            </summary>
+            <param name="type"></param>
+            <param name="Name">Name of the element to display on UI</param>
+            <param name="canShow">Boolean check if this should be shown in the modal with given conditions</param>
+            <param name="onTriggered">Gives a float which can be processed into a set value for the element return on the ui, which is in range [0 ~ 1]</param>
+            <param name="sprite">Sprite icon to use for it</param>
+            <param name="sliderDescIfIsSlider">Name for the slider if this has one</param>
+            <param name="numClampSteps">Number of positions the slider can take</param>
+            <returns>The new element</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.AddMinimapInteractable(ObjectTypes,System.Func{System.String},System.Func{UIMiniMapElement,System.Boolean},System.Func{System.Single,System.Single},System.Func{UnityEngine.Sprite},System.Func{System.String},System.Int32)">
+            <inheritdoc cref="M:TerraTechETCUtil.ManMinimapExt.AddMinimapInteractable(ObjectTypes,System.String,System.Func{UIMiniMapElement,System.Boolean},System.Func{System.Single,System.Single},System.Func{UnityEngine.Sprite},System.Func{System.String},System.Int32)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.RemoveMinimapInteractable(ObjectTypes,System.String)">
+            <summary>
+            Remove the minimap layer
+            <para>Call <see cref="M:TerraTechETCUtil.ManMinimapExt.UpdateAllMaps"/> after you are fully done with this</para>
+            </summary>
+            <param name="type"></param>
+            <param name="Name">Name of the element to display on UI</param>
+        </member>
+        <member name="P:TerraTechETCUtil.ManMinimapExt.OpenedModal">
+            <summary>
+            The modal for the map was opened
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManMinimapExt.OpenedModalTime">
+            <summary>
+            Modal was opened at this realtime + 0.4f
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.UpdateAllMaps">
+            <summary>
+            Update all added/removed layers shown on maps
+            </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.ManMinimapExt.MinimapExt">
+            <summary>
+            Upgrade the map to display tracks, allow Tech switching over far distances, ETC.
+              Higher priorities means the higher up it will be when loaded in
+            Alters UIMiniMapDisplay.
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManMinimapExt.MinimapExt.disp">
+            <summary>
+            The minimap instance
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManMinimapExt.MinimapExt.WorldMap">
+            <summary>
+            If this is the BIG world map
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.MinimapExt.InitInst(UIMiniMapDisplay)">
+            <summary>
+            HANDLED AUTOMATICALLY
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.MinimapExt.DeInitInst">
+            <summary>
+            Remove this
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ManMinimapExt.MinimapExt.GetMapLayers">
+            <summary>
+            Get all layers registered
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TerraTechETCUtil.UIMiniMapLayerExt">
+            <summary>
+            Adds a custom layer
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.Init">
+            <summary>
+            Called when created
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.Show">
+            <summary>
+            Called when menu opened
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.Hide">
+            <summary>
+            Called when menu hidden
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.Recycle">
+            <summary>
+            Called when destroyed
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.UpdateLayer">
+            <summary>
+            Called when layer is updated
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.OnUpdateLayer">
+            <summary>
+            Called when layer is updated
+            </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.UIMiniMapLayerExt.IconPool">
+            <summary>
+            Custom icons pool
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.IconPool.#ctor(UIMiniMapElement,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="prefab"></param>
+            <param name="initSize"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.IconPool.ReuseOrSpawn(UnityEngine.RectTransform)">
+            <summary>
+            
+            </summary>
+            <param name="parent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.IconPool.Reset">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.IconPool.RemoveAllUnused">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.IconPool.RemoveAll">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.IconPool.DestroyAll(System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="destroyPrefabToo"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityButtonPatches.OnPointerClick_Prefix">
+            <summary>
+            DontClickTheButtonWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityDropdownPatches.OnPointerClick_Prefix">
+            <summary>
+            DontClickTheDropdownWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityInputFieldPatches.OnPointerClick_Prefix">
+            <summary>
+            DontClickTheInputFieldWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySelectablePatches.OnPointerDown_Prefix">
+            <summary>
+            DontClickTheSelectableWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollbarPatches.OnPointerDown_Prefix">
+            <summary>
+            DontClickTheScrollbarWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySliderPatches.OnPointerDown_Prefix">
+            <summary>
+            DontClickTheSliderWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityTogglePatches.OnPointerClick_Prefix">
+            <summary>
+            DontClickTheToggleWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.GameObjectDocumentator">
+            <summary>
+            Documents <see cref="T:UnityEngine.GameObject"/>s.
+            <para>Also see <seealso cref="T:TerraTechETCUtil.AutoDocumentator"/> and <seealso cref="T:TerraTechETCUtil.Utilities"/></para>
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.GameObjectDocumentator.GetHierachyAndPrintToLog(UnityEngine.GameObject,System.Int32,TerraTechETCUtil.SlashState,System.Boolean)">
+            <summary>
+            Logs the target <see cref="T:UnityEngine.GameObject"/>'s hierarchy to <b>output_log.txt</b> at <see cref="P:UnityEngine.Application.consoleLogPath"/>
+            <para>For a the <see cref="T:UnityEngine.Component"/> version, see <seealso cref="M:TerraTechETCUtil.Utilities.PrintAllComponentsGameObjectDepth``1(UnityEngine.GameObject)"/></para>
+            <para>For a more <b>precise</b> version, see <seealso cref="T:TerraTechETCUtil.AutoDocumentator"/></para>
+            </summary>
+            <param name="targetBaseGameObject">The <see cref="T:UnityEngine.GameObject"/> to get from</param>
+            <param name="tabs">Offset number of tabs to apply to the extracted data</param>
+            <param name="slash">set to <b><see cref="F:TerraTechETCUtil.SlashState.Slash"/></b> if we should add slashes to the ends</param>
+            <param name="GetComponentsToo">Set this to true to also get the attached <see cref="T:UnityEngine.Component"/>s</param>
+        </member>
+        <member name="M:TerraTechETCUtil.GameObjectDocumentator.GetStrings(UnityEngine.GameObject,System.Text.StringBuilder,System.Int32,TerraTechETCUtil.SlashState,System.Boolean)">
+            <summary>
+            Logs the target <see cref="T:UnityEngine.GameObject"/>'s hierarchy into the given <see cref="T:System.Text.StringBuilder"/>
+            <para>For the <see cref="T:UnityEngine.Component"/> version, see <seealso cref="M:TerraTechETCUtil.Utilities.PrintAllComponentsGameObjectDepth``1(UnityEngine.GameObject)"/></para>
+            <para>For a more <b>precise</b> version, see <seealso cref="T:TerraTechETCUtil.AutoDocumentator"/></para>
+            </summary>
+            <param name="targetBaseGameObject">The <see cref="T:UnityEngine.GameObject"/> to get from</param>
+            <param name="SB">Inserts the data into this</param>
+            <param name="tabs">Offset number of tabs to apply to the extracted data</param>
+            <param name="slash">set to <b><see cref="F:TerraTechETCUtil.SlashState.Slash"/></b> if we should add slashes to the ends</param>
+            <param name="GetComponentsToo">Set this to true to also get the attached <see cref="T:UnityEngine.Component"/>s</param>
+        </member>
+        <member name="T:TerraTechETCUtil.AutoDataExtractorInst">
+            <summary>
+            Extracts fine data from a target Component while tracking the active instance (but not the changes made to it after initial creation!)
+            <para>Use <see cref="T:TerraTechETCUtil.AutoDataExtractorInst"/> to keep track of inactive instances</para>
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.AutoDataExtractorInst.inst">
+            <summary>
+            Targeted Component instance
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.AutoDataExtractorInst.#ctor(System.String,System.Type,UnityEngine.Component,System.Collections.Generic.HashSet{System.Object})">
+            <summary>
+            Creates a new AutoDataExtractorInst to extract and cache data about a target gameobject immedeately.
+            <para>Also stores instance information for immedeate later access.  For targets that may be deleted, see <see cref="T:TerraTechETCUtil.AutoDataExtractor"/></para>
+            </summary>
+            <param name="name">What to name the target in JSON</param>
+            <param name="type">The type this is targeting</param>
+            <param name="prefab">The actual prefab to gather context from</param>
+            <param name="grabbedAlready">For recursive calls, what has already been extracted to prevent duplicates</param>
+        </member>
+        <member name="M:TerraTechETCUtil.AutoDataExtractorInst.GetJsonFormatted(UnityEngine.Component,System.Text.StringBuilder,TerraTechETCUtil.SlashState,System.Int32)">
+            <summary>
+            Does NOT return end comma with newline!
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.AutoDataExtractorInst.Explorer_InternalRecursePost(System.Type,System.Reflection.FieldInfo[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:TerraTechETCUtil.AutoDataExtractorInst.EndDetails">
+            <inheritdoc/>
+        </member>
+        <member name="T:TerraTechETCUtil.ModuleInfo">
+            <summary>
+            Extracts module info about a targeted module.
+            <para>Can even extract it as JSON</para>
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ModuleInfo.#ctor(System.Type,UnityEngine.Component,System.Collections.Generic.HashSet{System.Object})">
+            <summary>
+            Creates a new ModuleInfo to extract and cache data about a target <see cref="T:Module"/> immedeately.
+            <para>Also stores instance information for immedeate later access.</para>
+            </summary>
+            <param name="grabbedType">The type this is targeting</param>
+            <param name="prefab">The actual prefab to gather context from</param>
+            <param name="grabbedAlready">For recursive calls, what has already been extracted to prevent duplicates</param>
+        </member>
         <member name="T:TerraTechETCUtil.Patches">
             <summary>
             General patch class for <see cref="N:TerraTechETCUtil"/>
             </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.UIScaler">
+            <summary>
+            Allows rescaling of <b>IMGUI</b>'s UI elements.
+            <para>Compatable with <see cref="T:TerraTechETCUtil.ManModGUI"/> calls while changing <see cref="F:TerraTechETCUtil.ManModGUI.GUIScale"/>, 
+            but <b>does not change <see cref="F:TerraTechETCUtil.AltUI.UIScalingMatrix"/></b></para>
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.UIScaler.prevMatrix">
+            <summary>
+            The cached previous matrix used before this
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.UIScaler.prevUIScale">
+            <summary>
+            Cached scale of the UI in <see cref="T:TerraTechETCUtil.ManModGUI"/>
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.UIScaler.prevUIWindowScale">
+            <summary>
+            Cached scale of the UI in <see cref="T:TerraTechETCUtil.ManModGUI"/>
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.UIScaler.IsRunning">
+            <summary>
+            <see cref="M:TerraTechETCUtil.UIScaler.ApplyScaling"/> was called.  Make sure that <see cref="M:TerraTechETCUtil.UIScaler.PrevScaling"/> is called after we are finished using the scaling effect
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.UIScaler.IsErrored">
+            <summary>
+            <see cref="M:TerraTechETCUtil.UIScaler.ApplyScaling"/> or <see cref="M:TerraTechETCUtil.UIScaler.PrevScaling"/> was called a second time, 
+            meaning the whole <b>IMGUI</b> system may be messed up
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.UIScaler.UIWindowScale">
+            <summary>
+            Multiplier for the scale of the UI window to relative the screen when this is applied
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.UIScaler.UIScale">
+            <summary>
+            Multiplier for the scale of the UI's elements relative to the screen when this is applied
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.UIScaler.UIScaleInv">
+            <summary>
+            Inverted multiplier for the scale of the UI relative to the screen when this is applied
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.UIScaler.ScaledWidth">
+            <summary>
+            The rescaled height of the main window of the game when this is applied
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.UIScaler.ScaledHeight">
+            <summary>
+            The rescaled width of the main window of the game when this is applied
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.#ctor(System.Single,System.Single)">
+            <summary>
+            Create a new IMGUI Scaler to rescale the UI.
+            <para><b>This constructor must be called outside of the usual UI calls</b></para>
+            </summary>
+            <param name="scale">The new scale for the UI's elements. Cannot be zero or negative.</param>
+            <param name="windowScale">The new scale for the UI's window. Cannot be zero or negative.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="scale"/> cannot be zero or negative.</exception>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.SetUIScale(System.Single)">
+            <summary>
+            Set the scale of the UI's contents.  It is not advised to utilize this in a OnGUI() call
+            </summary>
+            <param name="newScale">The new scale for the UI's contents. Cannot be zero or negative.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="newScale"/> cannot be zero or negative.</exception>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.SetWindowScale(System.Single)">
+            <summary>
+            Set the scale of the UI's windows.  It is not advised to utilize this in a OnGUI() call
+            </summary>
+            <param name="newScale">The new scale for the UI's windows. Cannot be zero or negative.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="newScale"/> cannot be zero or negative.</exception>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.ApplyScaling">
+            <summary>
+            Set the scale of the UI to <see cref="F:TerraTechETCUtil.UIScaler.UIMatrix"/>
+            <para>Use a try-finally block to call <see cref="M:TerraTechETCUtil.UIScaler.PrevScaling"/> after you are done using this incase of a UI issue.</para>
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.PrevScaling">
+            <summary>
+            Set the scale of the UI back to the previous scaling value.
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.FinishGUIMenuAndManageHovering(UnityEngine.Rect)">
+            <summary>
+            Makes this work as if it was a <see cref="T:TerraTechETCUtil.ManModGUI"/> menu and manages it in relation to other GUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.MouseIsOverGUIMenu(UnityEngine.Rect)">
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.MouseIsOverGUIMenu(UnityEngine.Rect)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.GetGUIPos(UnityEngine.Vector3)">
+            <summary>
+            Convert positioning of an object in scene space into this <see cref="T:TerraTechETCUtil.UIScaler"/>'s space
+            </summary>
+            <param name="scenePos">Position in scene</param>
+            <returns><see cref="T:UnityEngine.Vector3"/> relative to the GUI rescaled by this</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.ClampGUIToScreen(UnityEngine.Rect@,System.Boolean,System.Single,System.Single,System.Single)">
+            <summary>
+            <para><b>This is the <see cref="T:TerraTechETCUtil.UIScaler"/> version which only returns the UIScaler's space!</b></para>
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreen(UnityEngine.Rect@,System.Boolean,System.Single,System.Single,System.Single)"/>
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreen(UnityEngine.Rect@,System.Boolean)"/>
+            <param name="pos"></param>
+            <param name="centerOnMouse"></param>
+            <param name="extraSpacing"></param>
+            <param name="centerOnMouseXOffset"></param>
+            <param name="centerOnMouseYOffset"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.ClampGUIToScreenNonStrict(UnityEngine.Rect@,System.Single)">
+            <summary>
+            <para><b>This is the <see cref="T:TerraTechETCUtil.UIScaler"/> version which only returns the UIScaler's space!</b></para>
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrict(UnityEngine.Rect@,System.Single)"/>
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrict(UnityEngine.Rect@,System.Single)"/>
+            <param name="pos"></param>
+            <param name="extraSpacing"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.ClampGUIToScreenNonStrictHeader(UnityEngine.Rect@,System.Single)">
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrictHeader(UnityEngine.Rect@,System.Single)"/>
+            <summary>
+            </summary>
+            <param name="pos"></param>
+            <param name="extraSpacing"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])">
+            <summary>
+            <para><b>This is the <see cref="T:TerraTechETCUtil.UIScaler"/> version</b></para>
+            <inheritdoc cref="M:TerraTechETCUtil.AltUI.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])"/>
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.AltUI.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])"/>
+            <param name="id"></param>
+            <param name="screenRect"></param>
+            <param name="func"></param>
+            <param name="title"></param>
+            <param name="alpha"></param>
+            <param name="closeCallback"></param>
+            <param name="topBarExtraGUI"></param>
+            <param name="blockCursorControl"></param>
+            <param name="draggableHeader"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])">
+            <inheritdoc cref="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])"/>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])">
+            <inheritdoc cref="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])"/>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])">
+            <inheritdoc cref="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])"/>
+        </member>
+        <member name="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])">
+            <inheritdoc cref="M:TerraTechETCUtil.UIScaler.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])"/>
         </member>
         <member name="T:TerraTechETCUtil.GUIMiniMenu">
             <summary>
@@ -3064,6 +3612,7 @@
         <member name="T:TerraTechETCUtil.GUI_BM_Element">
             <summary>
             Interface for elements displayed by <see cref="T:TerraTechETCUtil.GUIButtonMadness"/>
+            <para>See also <seealso cref="T:TerraTechETCUtil.ExtModuleClickable"/></para>
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.GUI_BM_Element.GetName">
@@ -3102,8 +3651,8 @@
             </summary>
         </member>
         <member name="T:TerraTechETCUtil.GUI_BM_Element_Simple">
-            <inheritdoc cref="T:TerraTechETCUtil.GUI_BM_Element"/>
             <summary>
+            <inheritdoc cref="T:TerraTechETCUtil.GUI_BM_Element"/>
             <para>This is for simple elements</para>
             </summary>
         </member>
@@ -3741,6 +4290,138 @@
             <param name="toApply">The color to multiply/add to <paramref name="host"/></param>
             <param name="strength">The strength of <paramref name="toApply"/> in adding it's colors. MUST be within [0 - 1]</param>
             <returns>The blended color</returns>
+        </member>
+        <member name="T:TerraTechETCUtil.ExplosionHelper">
+            <summary>
+            Goto for explosion effects
+            <para>Aka "<b>Pyromanic</b>"</para>
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.explodeType">
+            <summary>
+            Explosion getter
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.explodeSFX">
+            <summary>
+            Explosion getter
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.explodeSFXSize">
+            <summary>
+            Explosion getter
+            </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.ExplosionHelper.Type">
+            <summary>
+            Explosion type
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Explosive">
+            <summary> Explode like normal </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.EnergyBlue">
+            <summary> Explode like energy </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.EnergyRed">
+            <summary> Explode like energy </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Chemical">
+            <summary> Explode like battery </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Oil">
+            <summary> Explode like fuel tank </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Debris_GSO">
+            <summary> Explode like GSO block </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Debris_GC">
+            <summary> Explode like GC block </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Debris_RR">
+            <summary> Explode like RR block </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Debris_VEN">
+            <summary> Explode like VEN block </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Debris_HE">
+            <summary> Explode like HE block </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Debris_BF">
+            <summary> Explode like BF block </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.Type.Debris_SJ">
+            <summary> Explode like SJ block </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.ExplosionHelper.ExplosionEntry">
+            <summary>
+            Entry for an explosion
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.ExplosionEntry.prefab">
+            <summary> The explosion prefab</summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.ExplosionEntry.DamageType">
+            <summary> The explosion prefab</summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.ExplosionEntry.ExplodeSFX">
+            <summary> The explosion SFX type to use</summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.ExplosionEntry.ExplodeSFXSize">
+            <summary> The explosion SFX size to use</summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.ExplosionEntry.EffectRadius">
+            <summary> The max radius this explosion will reach out from </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.ExplosionEntry.EffectRadiusMaxStrengthPercent">
+            <summary> The [0 ~ 1] radius range where the explosion deals its max damage inwards from where 0 is the center and 1 is the outwards reach</summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.ExplosionEntry.MaxDamage">
+            <summary> The maximum damage this explosion can inflict</summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ExplosionHelper.ExplosionEntry.MaxImpulse">
+            <summary> The maximum launching force this explosion can inflict</summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ExplosionHelper.Explosions">
+            <summary>
+            Dirty lookup of explosions
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ExplosionHelper.FetchExplosionWeapon(BlockTypes,UnityEngine.Transform@)">
+            <summary>
+            CREATES NEW POOL FOR <paramref name="exploder"/>
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ExplosionHelper.FetchExplosionBlock(BlockTypes,UnityEngine.Transform@)">
+            <summary>
+            CREATES NEW POOL FOR <paramref name="exploder"/>
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ExplosionHelper.SpawnExplosionByStrength(TerraTechETCUtil.ExplosionHelper.Type,UnityEngine.Vector3,System.Boolean,System.Single,System.Boolean,System.Single,System.Single,System.Single,ManDamage.DamageType,ManSFX.ExplosionType,ManSFX.ExplosionSize,System.Boolean)">
+            <summary>
+            Spawn an explosion based on it's strength.
+            <para>See <seealso cref="T:TerraTechETCUtil.SpawnHelper"/> for more explosions.</para>
+            </summary>
+            <param name="type">Explosion visual type</param>
+            <param name="pos">Position in scene space</param>
+            <param name="bright">Orange glow parts</param>
+            <param name="dealDamage">Apply the damage</param>
+            <param name="strength">Strength based on the damage inflicted
+            <para>Usually in a range from [0 ~ 250]</para></param>
+            <param name="launchForce">launching force inflicted on Visibles hit by this.
+            <para>Leave at 0 to use preset</para></param>
+            <param name="effectRadius"> The max radius this explosion will reach out from
+            <para>Leave at 0 to use preset</para></param>
+            <param name="effectRadiusMaxStrengthPercent">The [0 ~ 1] radius range where the explosion deals its max damage inwards from where 0 is the center and 1 is the outwards reach
+            <para>Leave at 0 to use preset</para></param>
+            <param name="dmgType">The damageable type to deal damage with using.
+            <para>Leave at -1 to use preset</para></param>
+            <param name="exploSFX">The sfx type used for the explosion
+            <para>Leave at -1 to use preset</para></param>
+            <param name="exploSFXSize">The sfx size used for the explosion
+            <para>Leave at -1 to use preset</para></param>
+            <param name="shockwave">Do a shockwave if this explosion has any</param>
+            <returns>The explosion</returns>
         </member>
         <member name="T:TerraTechETCUtil.GUILayoutHelpers">
             <summary>
@@ -5128,6 +5809,22 @@
             Cancel ALL invokes managed by <see cref="T:TerraTechETCUtil.InvokeHelper"/>
             </summary>
         </member>
+        <member name="F:TerraTechETCUtil.InvokeHelper.ClickEventSimple">
+            <summary>
+            True (Right, Left) False,
+            True   (Down, Up)  False
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.InvokeHelper.MouseLeftDown">
+            <summary>
+            Left mouse button down
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.InvokeHelper.MouseRightDown">
+            <summary>
+            Right mouse button down
+            </summary>
+        </member>
         <member name="F:TerraTechETCUtil.InvokeHelper.IDErrorWindow">
             <summary>
             Error window ID for <see cref="M:TerraTechETCUtil.InvokeHelper.ShowErrorPopup(System.String,System.Boolean,System.Action)"/>
@@ -5387,6 +6084,16 @@
             Check to see if <b>WaterMod</b> or it's other variant is present
             </summary>
         </member>
+        <member name="P:TerraTechETCUtil.ModStatusChecker.IsConfigHelperPresent">
+            <summary>
+            Check to see if <b>ConfigHelper</b> is present
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ModStatusChecker.IsNativeOptionsPresent">
+            <summary>
+            Check to see if <b>Nuterra.NativeOptions</b> is present
+            </summary>
+        </member>
         <member name="P:TerraTechETCUtil.ModStatusChecker.InitFailiure">
             <summary>
             A non-repeating error has occurred in one of our mod boot attempts and this is bad
@@ -5408,6 +6115,19 @@
             </summary>
             <param name="name"></param>
             <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ModStatusChecker.LookForType(System.String)">
+            <summary>
+            Look for a <see cref="T:System.Type"/> of given type name
+            </summary>
+            <param name="name"></param>
+            <returns><see cref="T:System.Type"/> if found, otherwise null</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ModStatusChecker.IsModOptionsAvailable">
+            <summary>
+            Check if we can actually use mod options correctly
+            </summary>
+            <returns>True if both <b>ConfigHelper</b> AND <b>NativeOptions</b> is present</returns>
         </member>
         <member name="M:TerraTechETCUtil.ModStatusChecker.EncapsulateSafeInit(System.String,System.Action,System.Action,System.Boolean)">
             <summary>
@@ -5636,6 +6356,7 @@
         <member name="T:TerraTechETCUtil.ManModNetwork">
             <summary>
             Handles mod network hooks
+            <para><b>INSURE YOU CALL <see cref="M:TerraTechETCUtil.LegModExt.InsurePatches"/> BEFORE USING</b></para>
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.ManModNetwork.Host">
@@ -5658,21 +6379,21 @@
             All assigned <see cref="T:TerraTechETCUtil.NetworkHook"/>s
             </summary>
         </member>
-        <member name="T:TerraTechETCUtil.ManModNetwork.PlayerRequestServerCallbackBase">
+        <member name="T:TerraTechETCUtil.ManModNetwork.NetSyncMessage">
             <summary>
             Sanity check for servers to see if their clients' hooks match
             </summary>
         </member>
-        <member name="M:TerraTechETCUtil.ManModNetwork.PlayerRequestServerCallbackBase.#ctor">
+        <member name="M:TerraTechETCUtil.ManModNetwork.NetSyncMessage.#ctor">
             <summary> </summary>
         </member>
-        <member name="M:TerraTechETCUtil.ManModNetwork.PlayerRequestServerCallbackBase.#ctor(System.Int32,System.Int32)">
+        <member name="M:TerraTechETCUtil.ManModNetwork.NetSyncMessage.#ctor(System.String,System.Int32)">
             <summary> </summary>
         </member>
-        <member name="F:TerraTechETCUtil.ManModNetwork.PlayerRequestServerCallbackBase.senderID">
+        <member name="F:TerraTechETCUtil.ManModNetwork.NetSyncMessage.stringID">
             <summary> </summary>
         </member>
-        <member name="F:TerraTechETCUtil.ManModNetwork.PlayerRequestServerCallbackBase.hookID">
+        <member name="F:TerraTechETCUtil.ManModNetwork.NetSyncMessage.hookID">
             <summary> </summary>
         </member>
         <member name="T:TerraTechETCUtil.NetworkHook">
@@ -5685,7 +6406,7 @@
             The string id of the hool
             </summary>
         </member>
-        <member name="F:TerraTechETCUtil.NetworkHook.AssignedID">
+        <member name="P:TerraTechETCUtil.NetworkHook.AssignedID">
             <summary>
             The assigned ID that <see cref="T:TerraTechETCUtil.ManModNetwork"/> gives when the <see cref="T:TerraTechETCUtil.NetworkHook"/> is created
             </summary>
@@ -5895,6 +6616,7 @@
         <member name="T:TerraTechETCUtil.NetworkHook`1">
             <summary>
             A simple network hook to send mod networking information
+            <para><b>INSURE YOU CALL <see cref="M:TerraTechETCUtil.LegModExt.InsurePatches"/> BEFORE USING</b></para>
             </summary>
             <typeparam name="T"></typeparam>
         </member>
@@ -5911,6 +6633,7 @@
         <member name="M:TerraTechETCUtil.NetworkHook`1.#ctor(System.String,System.Func{`0,System.Boolean,System.Boolean},TerraTechETCUtil.NetMessageType)">
             <summary>
             Create a new <see cref="T:TerraTechETCUtil.NetworkHook"/>
+            <para><b>INSURE YOU CALL <see cref="M:TerraTechETCUtil.LegModExt.InsurePatches"/> BEFORE USING</b></para>
             </summary>
             <param name="ID"></param>
             <param name="onReceive"></param>
@@ -6286,6 +7009,9 @@
         <member name="F:TerraTechETCUtil.AltUI.TitleFontSize">
             <summary> Default title font size </summary>
         </member>
+        <member name="F:TerraTechETCUtil.AltUI.HeaderBarHeight">
+            <summary>  </summary>
+        </member>
         <member name="P:TerraTechETCUtil.AltUI.UIScaling">
             <summary>
             The size of the UI scale, in terms of elements
@@ -6513,6 +7239,9 @@
             <summary> GUI Style present </summary>
         </member>
         <member name="F:TerraTechETCUtil.AltUI.LabelWhite">
+            <summary> GUI Style present </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.AltUI.LabelWhiteWrap">
             <summary> GUI Style present </summary>
         </member>
         <member name="F:TerraTechETCUtil.AltUI.LabelWhiteTitle">
@@ -7085,7 +7814,7 @@
             <summary>
             The manager for <see cref="T:TerraTechETCUtil.ExtUsageHint.UsageHint"/>s that adds modded hints to <see cref="T:ManHints"/>
             <para>Unlike <see cref="T:ManHints"/>, this <b>also works in singleplayer</b></para>
-            <para>Also consider seeing <see cref="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBanner(System.String,System.Boolean)"/> for more important popups</para>
+            <para>Also consider seeing <see cref="!:UIHelpersExt.BigF5broningBannerMP(string, bool)"/> for more important popups</para>
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.ExtUsageHint.prefix">
@@ -7097,7 +7826,7 @@
             <summary>
             A usage hint automatically integrated with <see cref="T:ManHints"/> managed by <see cref="T:TerraTechETCUtil.ExtUsageHint"/>
             <para>Unlike <see cref="T:ManHints"/>, this <b>also works in singleplayer</b></para>
-            <para>Also consider seeing <see cref="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBanner(System.String,System.Boolean)"/> for more important popups</para>
+            <para>Also consider seeing <see cref="!:UIHelpersExt.BigF5broningBannerMP(string, bool)"/> for more important popups</para>
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.ExtUsageHint.UsageHint.modID">
@@ -7134,7 +7863,7 @@
             <summary>
             Create a new hint for use on the UI system.
             <para>Unlike <see cref="T:ManHints"/>, this <b>also works in singleplayer</b></para>
-            <para>Also consider seeing <see cref="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBanner(System.String,System.Boolean)"/> for more important popups</para>
+            <para>Also consider seeing <see cref="!:UIHelpersExt.BigF5broningBannerMP(string, bool)"/> for more important popups</para>
             </summary>
             <param name="ModID">ModID from the mod adding this</param>
             <param name="StringID">Specific ID used to store and identify the hint in serialization save and load.
@@ -7377,14 +8106,14 @@
             <para>Used for modded modules equivalent to <see cref="T:Module"/></para>
             </summary>
         </member>
-        <member name="P:TerraTechETCUtil.ExtModule.BlockDetailFlags">
-            <summary>
-            The cached data fast lookup for the block
-            </summary>
-        </member>
         <member name="P:TerraTechETCUtil.ExtModule.LastBlock">
             <summary>
             The last block that was grabbed
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ExtModule.BlockDetailFlags">
+            <summary>
+            The cached data fast lookup for the block
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.ExtModule.block">
@@ -7426,7 +8155,7 @@
             Called when the block is detached, equivalent to <see cref="F:TankBlock.DetachingEvent"/>
             </summary>
         </member>
-        <member name="M:TerraTechETCUtil.ExtModule.GetAllAttachedAPNeighboors">
+        <member name="M:TerraTechETCUtil.ExtModule.IterateAllAttachedAPNeighboors">
             <summary>
             Iterate all attached AP neigboors on the block this is attached to
             </summary>
@@ -7532,6 +8261,18 @@
             Manages all <see cref="T:TerraTechETCUtil.ProjBase"/>
             </summary>
         </member>
+        <member name="F:TerraTechETCUtil.ManExtProj.deathTimerProj">
+            <summary> Projectile getter </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManExtProj.gravityAffectProj">
+            <summary> Projectile getter </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManExtProj.stickyProj">
+            <summary> Projectile getter </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManExtProj.explodeProj">
+            <summary> Projectile getter </summary>
+        </member>
         <member name="F:TerraTechETCUtil.ManExtProj.projPool">
             <summary>
             All projectiles managed by <see cref="T:TerraTechETCUtil.ManExtProj"/>
@@ -7545,6 +8286,7 @@
         <member name="T:TerraTechETCUtil.ExtProj">
             <summary>
             Does nothing. <b>DO NOT USE ALONE.</b>
+            <para><b>INSURE YOU CALL <see cref="M:TerraTechETCUtil.LegModExt.InsurePatches"/> BEFORE USING</b></para>
             <para>Automatically added when a related <see cref="T:TerraTechETCUtil.ChildModule"/> is used on a <see cref="T:WeaponRound"/></para>
             </summary>
         </member>
@@ -7668,12 +8410,12 @@
         </member>
         <member name="M:TerraTechETCUtil.ProjBase.ExplodeNoRecycle">
             <summary>
-            Explode without removing from the world
+            Explode without removing projectile from the world
             </summary>
         </member>
         <member name="M:TerraTechETCUtil.ProjBase.ExplodeNoDamage(Projectile)">
             <summary>
-            Explode cosmetically, does not remove from world
+            Explode cosmetically, does not remove projectile from world
             </summary>
             <param name="inst"></param>
         </member>
@@ -7872,6 +8614,11 @@
             The modded ingame wiki manager.
             <para>Every <see cref="T:TerraTechETCUtil.ManIngameWiki.WikiPage"/> type has subscribe-able contents</para>
             <para>See <seealso cref="T:TerraTechETCUtil.ExtendedWiki"/> for more options</para>
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManIngameWiki.OnWikiOpened">
+            <summary>
+            Sent after the player has just opened the wiki
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.ManIngameWiki.OnModWikiCreated">
@@ -8872,6 +9619,7 @@
         <member name="T:TerraTechETCUtil.ManModGUI">
             <summary>
             The global mod popup manager
+            <para><b>INSURE YOU CALL <see cref="M:TerraTechETCUtil.LegModExt.InsurePatches"/> BEFORE USING</b></para>
             <para>See <seealso cref="T:TerraTechETCUtil.UIHelpersExt"/> and <seealso cref="T:TerraTechETCUtil.AltUI"/> for more UI helpers</para>
             </summary>
         </member>
@@ -8982,24 +9730,79 @@
             Bool to tell if the custom GUI is ready to go
             </summary>
         </member>
+        <member name="F:TerraTechETCUtil.ManModGUI.ModWikiGUIRefWidth">
+            <summary>
+            RELATIVE TO SCREEN WIDTH OF 1366 PIXELS
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManModGUI.ModWikiGUIWidthDefault">
+            <summary>
+            Window size dimension for expected defaults
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManModGUI.ModWikiGUIRefHeight">
+            <summary>
+            RELATIVE TO SCREEN HEIGHT OF 768 PIXELS
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManModGUI.ModWikiGUIHeightDefaultFromWidth">
+            <summary>
+            Window size dimension for expected defaults
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManModGUI.ModWikiGUIRescale">
+            <summary>
+            The window of the managed Mod Wiki UI
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManModGUI.ModWikiGUIScale">
+            <summary>
+            The window of the managed Mod Wiki UI
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManModGUI.ModWikiGUIScaler">
+            <summary>
+            The window of the managed Mod Wiki UI relative to their contents resolution
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManModGUI.CurrentGUIWindowScale">
+            <summary>
+            Current GUI scale of the managed UI systems relative to their window scale
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManModGUI.CurrentGUIScale">
+            <summary>
+            Current GUI scale of the managed UI systems relative to their contents resolution
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManModGUI.CurrentGUIScaleInv">
+            <summary>
+            Current GUI scale of the managed UI systems relative to their contents resolution
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManModGUI.GameWindowScaledWidth">
+            <summary>
+            The width of the entire screen relative to the current rescaled UI
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManModGUI.GameWindowScaledHeight">
+            <summary>
+            The height of the entire screen relative to the current rescaled UI
+            </summary>
+        </member>
         <member name="F:TerraTechETCUtil.ManModGUI.GUIScale">
             <summary>
-            The scale of the managed UI systems
+            The scale of the managed UI systems relative to their contents resolution
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManModGUI.GUIRescale">
+            <summary>
+            The window scale of the managed UI systems
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.ManModGUI.GUIScaleInv">
             <summary>
             The inverted scale of the managed UI systems
-            </summary>
-        </member>
-        <member name="P:TerraTechETCUtil.ManModGUI.GameWindowScaledWidth">
-            <summary>
-            The width of the entire screen relative to the <see cref="T:TerraTechETCUtil.ManModGUI"/> rescaled UI
-            </summary>
-        </member>
-        <member name="P:TerraTechETCUtil.ManModGUI.GameWindowScaledHeight">
-            <summary>
-            The height of the entire screen relative to the <see cref="T:TerraTechETCUtil.ManModGUI"/> rescaled UI
             </summary>
         </member>
         <member name="M:TerraTechETCUtil.ManModGUI.RequestInit(ModBase)">
@@ -9130,6 +9933,11 @@
         <member name="F:TerraTechETCUtil.ManModGUI.IsMouseOverAnyModGUI">
             <summary>
             This value will increase based on the number of GUIs the mouse is hovering over
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.ManModGUI.IsMouseOverAnyGUI">
+            <summary>
+            Is the interaction with the world blocked?
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.ManModGUI.IsWorldInteractionBlocked">
@@ -9478,6 +10286,7 @@
         <member name="T:TerraTechETCUtil.SpawnHelper">
             <summary>
             Handles mod-side spawning of game objects
+            <para>See also <seealso cref="T:TerraTechETCUtil.ExplosionHelper"/> for explosions</para>
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.SpawnHelper.BiomesByName">
@@ -9804,7 +10613,7 @@
         </member>
         <member name="P:TerraTechETCUtil.UIHelpersExt.ModContentIcon">
             <summary>
-            That default icon used for mods that have no icon
+            That default wrench icon used for mod blocks
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.UIHelpersExt.NullSprite">
@@ -9883,7 +10692,7 @@
         </member>
         <member name="T:TerraTechETCUtil.UIHelpersExt.NetBigMessage">
             <summary>
-            Network message for <see cref="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBanner(System.String,System.Boolean)"/>
+            Network message for <see cref="!:BigF5broningBannerMP(string, bool)"/>
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.UIHelpersExt.BigF5broningBannerActive">
@@ -9891,16 +10700,28 @@
             The BigF5broningBanner is active and shown on the screen.
             </summary>
         </member>
-        <member name="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBanner(System.String,System.Boolean)">
-            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBanner(System.Int32,System.String,System.Boolean)"/>
+        <member name="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBannerMP(System.String,System.Boolean,System.Single)">
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBannerMP(System.Int32,System.String,System.Boolean,System.Single)"/>
         </member>
-        <member name="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBanner(System.Int32,System.String,System.Boolean)">
+        <member name="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBannerMP(System.Int32,System.String,System.Boolean,System.Single)">
             <summary>
             Make a big, nice obvious warning on the screen that's nearly impossible to miss.
             </summary>
-            <param name="team">The team we should only show the banner to</param>
+            <param name="team">The team we should only show the banner to. 
+            <para>Leave at <see cref="F:System.Int32.MinValue"/> to do all</para></param>
             <param name="Text">What text to show on the banner.  Set to nothing to hide immedeately.</param>
             <param name="startNoise">Play payload inbound warning SFX for duration of showing.</param>
+            <param name="duration">How long to show the banner for in seconds</param>
+        </member>
+        <member name="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBannerSP(System.String,System.Boolean,System.Single)">
+            <summary>
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBannerMP(System.Int32,System.String,System.Boolean,System.Single)"/>
+            <para><b>This is the singleplayer or our client only version</b></para>
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.BigF5broningBannerMP(System.Int32,System.String,System.Boolean,System.Single)"/>
+            <param name="Text"></param>
+            <param name="startNoise"></param>
+            <param name="duration"></param>
         </member>
         <member name="M:TerraTechETCUtil.UIHelpersExt.PointAtTransform(UnityEngine.Transform,UnityEngine.Vector3,System.Single)">
             <summary>
@@ -9936,71 +10757,42 @@
         <member name="M:TerraTechETCUtil.UIHelpersExt.MouseIsOverGUIMenu(UnityEngine.Rect)">
             <summary>
             Check if the mouse is over the given GUI.Window Rect
+            <para>Scale is relative to <see cref="P:TerraTechETCUtil.ManModGUI.CurrentGUIScale"/></para>
             </summary>
             <param name="pos">The Window's Rect on the screen</param>
             <returns>If the mouse is DIRECTLY within the specified rect on the screen</returns>
         </member>
-        <member name="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreen(UnityEngine.Rect@,System.Boolean)">
+        <member name="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreen(UnityEngine.Rect@,System.Boolean,System.Single,System.Single,System.Single)">
             <summary>
             Clamps the given Rect to be fully within bounds of the screen.  
             This may not be possible if the screen is too small to fit the Rect entirely.
+            <para>Scale is relative to <see cref="P:TerraTechETCUtil.ManModGUI.CurrentGUIScale"/></para>
             </summary>
             <param name="pos">The Rect to clamp within the screen bounds</param>
             <param name="centerOnMouse">If it should re-center on the mouse, then clamp to screen</param>
+            <param name="centerOnMouseXOffset">The extra offset to apply in range of <b>[0 ~ 1]</b> to offset relative to the mouse.
+            <para>While values higher and lower than <b>[0 ~ 1]</b> are supported, it is not advised.</para></param>
+            <param name="centerOnMouseYOffset">The extra offset to apply in range of <b>[0 ~ 1]</b> to offset relative to the mouse.
+            <para>While values higher and lower than <b>[0 ~ 1]</b> are supported, it is not advised.</para></param>
+            <param name="extraSpacing">Extra spacing in pixels to add <b>around</b> the given Rect</param>
         </member>
-        <member name="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrict(UnityEngine.Rect@)">
+        <member name="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreen(UnityEngine.Rect@,System.Boolean)">
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreen(UnityEngine.Rect@,System.Boolean,System.Single,System.Single,System.Single)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrict(UnityEngine.Rect@,System.Single)">
             <summary>
             Clamps the given Rect to at lesst be partially within bounds of the screen.  
             This may not be possible if the screen is too small to fit the Rect entirely.
+            <para>Scale is relative to <see cref="P:TerraTechETCUtil.ManModGUI.CurrentGUIScale"/></para>
             </summary>
             <param name="pos">The Rect to clamp within the screen bounds</param>
+            <param name="extraSpacing">Extra spacing where the <b>ui shouldn't be allowed further out from</b></param>
         </member>
-        <member name="T:TerraTechETCUtil.ModuleInfo">
-            <summary>
-            Extracts module info about a targeted module.
-            <para>Can even extract it as JSON</para>
-            </summary>
+        <member name="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrict(UnityEngine.Rect@)">
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrict(UnityEngine.Rect@,System.Single)"/>
         </member>
-        <member name="M:TerraTechETCUtil.ModuleInfo.#ctor(System.Type,UnityEngine.Component,System.Collections.Generic.HashSet{System.Object})">
-            <summary>
-            Creates a new ModuleInfo to extract and cache data about a target <see cref="T:Module"/> immedeately.
-            <para>Also stores instance information for immedeate later access.</para>
-            </summary>
-            <param name="grabbedType">The type this is targeting</param>
-            <param name="prefab">The actual prefab to gather context from</param>
-            <param name="grabbedAlready">For recursive calls, what has already been extracted to prevent duplicates</param>
-        </member>
-        <member name="T:TerraTechETCUtil.AutoDataExtractorInst">
-            <summary>
-            Extracts fine data from a target Component while tracking the active instance (but not the changes made to it after initial creation!)
-            <para>Use <see cref="T:TerraTechETCUtil.AutoDataExtractorInst"/> to keep track of inactive instances</para>
-            </summary>
-        </member>
-        <member name="F:TerraTechETCUtil.AutoDataExtractorInst.inst">
-            <summary>
-            Targeted Component instance
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.AutoDataExtractorInst.#ctor(System.String,System.Type,UnityEngine.Component,System.Collections.Generic.HashSet{System.Object})">
-            <summary>
-            Creates a new AutoDataExtractorInst to extract and cache data about a target gameobject immedeately.
-            <para>Also stores instance information for immedeate later access.  For targets that may be deleted, see <see cref="T:TerraTechETCUtil.AutoDataExtractor"/></para>
-            </summary>
-            <param name="name">What to name the target in JSON</param>
-            <param name="type">The type this is targeting</param>
-            <param name="prefab">The actual prefab to gather context from</param>
-            <param name="grabbedAlready">For recursive calls, what has already been extracted to prevent duplicates</param>
-        </member>
-        <member name="M:TerraTechETCUtil.AutoDataExtractorInst.GetJsonFormatted(UnityEngine.Component,System.Text.StringBuilder,TerraTechETCUtil.SlashState,System.Int32)">
-            <summary>
-            Does NOT return end comma with newline!
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.AutoDataExtractorInst.Explorer_InternalRecursePost(System.Type,System.Reflection.FieldInfo[])">
-            <inheritdoc/>
-        </member>
-        <member name="M:TerraTechETCUtil.AutoDataExtractorInst.EndDetails">
-            <inheritdoc/>
+        <member name="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrictHeader(UnityEngine.Rect@,System.Single)">
+            <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.ClampGUIToScreenNonStrict(UnityEngine.Rect@,System.Single)"/>
         </member>
         <member name="T:TerraTechETCUtil.AutoDataExtractor">
             <summary>
@@ -10046,7 +10838,7 @@
         <member name="F:TerraTechETCUtil.AutoDataExtractor.degSecUnit">
             <summary> Standardized unit to display in the wiki for respective method calls here </summary>
         </member>
-        <member name="M:TerraTechETCUtil.AutoDataExtractor.#ctor(System.String,System.Type,System.Object,System.Collections.Generic.HashSet{System.Object})">
+        <member name="M:TerraTechETCUtil.AutoDataExtractor.#ctor(System.String,System.Type,System.Object,System.Collections.Generic.HashSet{System.Object},System.Boolean)">
             <summary>
             Creates a new AutoDataExtractor to extract and cache data about a target gameobject immedeately.
             <para>Does not instance information for later direct access. For that use <see cref="T:TerraTechETCUtil.AutoDataExtractorInst"/> instead.</para>
@@ -10055,6 +10847,7 @@
             <param name="grabbedType">The type this is targeting</param>
             <param name="prefab">The actual prefab to gather context from</param>
             <param name="grabbedAlready">For recursive calls, what has already been extracted to prevent duplicates</param>
+            <param name="baseLayer">Do not touch this value, for telling it when to stop</param>
         </member>
         <member name="F:TerraTechETCUtil.AutoDataExtractor.clipboard">
             <summary>
@@ -10070,6 +10863,9 @@
             <summary>
             Class and Field names to change when displayed in the Wiki
             </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.AutoDataExtractor.DisplayBool(System.Object)">
+            <summary> Standardized unit method to display in the wiki </summary>
         </member>
         <member name="M:TerraTechETCUtil.AutoDataExtractor.DisplayDist(System.Object)">
             <summary> Standardized unit method to display in the wiki </summary>
@@ -10108,6 +10904,9 @@
             <summary> Standardized unit method to display in the wiki </summary>
         </member>
         <member name="M:TerraTechETCUtil.AutoDataExtractor.DisplayCountOfCooldown(System.Object,System.String)">
+            <summary> Standardized unit method to display in the wiki </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.AutoDataExtractor.DisplayProjectileDetails(System.Object,System.String)">
             <summary> Standardized unit method to display in the wiki </summary>
         </member>
         <member name="F:TerraTechETCUtil.AutoDataExtractor.SpecialNamesFuncs">
@@ -10281,7 +11080,7 @@
             <param name="nameID">The actual block ID to affiliate with this page</param>
         </member>
         <member name="M:TerraTechETCUtil.WikiPageBlock.#ctor(System.Int32,System.String,TerraTechETCUtil.ManIngameWiki.WikiPageGroup)">
-            <inheritdoc cref="!: WikiPageBlock.WikiPageBlock(int)"/>
+            <inheritdoc cref="M:TerraTechETCUtil.WikiPageBlock.#ctor(System.Int32,System.String)"/>
         </member>
         <member name="M:TerraTechETCUtil.WikiPageBlock.InsureWikiGroup(System.String,TerraTechETCUtil.LocExtString,UnityEngine.Sprite)">
             <inheritdoc/>
@@ -10694,6 +11493,24 @@
             Manages extension methods for various classes.
             </summary>
         </member>
+        <member name="M:TerraTechETCUtil.Utilities.InitWithErrorHandling(ModBase,System.String,System.Action,System.Action,System.Boolean)">
+            <inheritdoc cref="M:TerraTechETCUtil.ModStatusChecker.EncapsulateSafeInit(System.String,System.Action,System.Action,System.Boolean)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.LookForMod(ModBase,System.String)">
+            <inheritdoc cref="M:TerraTechETCUtil.ModStatusChecker.LookForMod(System.String)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.LookForType(ModBase,System.String)">
+            <inheritdoc cref="M:TerraTechETCUtil.ModStatusChecker.LookForType(System.String)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.IsModOptionsAvailable(ModBase)">
+            <inheritdoc cref="M:TerraTechETCUtil.ModStatusChecker.IsModOptionsAvailable"/>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.FixupTechData(TechData)">
+            <summary>
+            Tries to fix tech data from older modded Techs
+            </summary>
+            <param name="TD"></param>
+        </member>
         <member name="M:TerraTechETCUtil.Utilities.ToRGBA255(UnityEngine.Color)">
             <summary>
             To <see cref="T:TerraTechETCUtil.ColorBytes"/> type.
@@ -10752,6 +11569,15 @@
             <param name="flags">The flags to set</param>
             <param name="state">The state to set</param>
         </member>
+        <member name="M:TerraTechETCUtil.Utilities.SetFlagsBitShift``1(``0@,``0,System.Boolean)">
+            <summary>
+            Sets flags that are already bit-shifted in enum
+            </summary>
+            <typeparam name="T">Enum</typeparam>
+            <param name="inst">The enum to set</param>
+            <param name="flags">The flags to set</param>
+            <param name="state">The state to set</param>
+        </member>
         <member name="M:TerraTechETCUtil.Utilities.SetFlagsBitShift``1(``0@,System.Boolean,``0[])">
             <summary>
             Sets flags that aren't bit-shifted in enum
@@ -10795,6 +11621,23 @@
             <param name="Dimensions">extents x and y positive only</param>
             <returns>Iterator for every element of the rect, iterating from <paramref name="iVec2"/> outwards</returns>
         </member>
+        <member name="M:TerraTechETCUtil.Utilities.IterateRectVolumeDiameter(WorldPosition,System.Int32)">
+            <summary>
+            Iterate a grid in terms of filling a rectangle from the closest <b>corner</b> given start <paramref name="WP"/>,
+            trying to stay within a set diameter
+            </summary>
+            <param name="WP"><see cref="T:WorldPosition"/> to use</param>
+            <param name="MaxTileLoadingDiameter">Only goes up to 4 for even diameter widths</param>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.IterateRectVolumeDiameter_LEGACY(System.Collections.Generic.List{IntVector2},WorldPosition,System.Int32)">
+            <summary>
+            Iterate a grid in terms of filling a rectangle from the closest <b>corner</b> given start <paramref name="WP"/>,
+            trying to stay within a set diameter
+            </summary>
+            <param name="cache">To add the results to.  Make sure to Clear() in advance</param>
+            <param name="WP"><see cref="T:WorldPosition"/> to use</param>
+            <param name="MaxTileLoadingDiameter">Only goes up to 4 for even diameter widths</param>
+        </member>
         <member name="M:TerraTechETCUtil.Utilities.LogGameObjectHierachy(UnityEngine.GameObject,System.Int32)">
             <summary>
             Log the contents of the target <see cref="T:UnityEngine.GameObject"/>
@@ -10813,7 +11656,7 @@
         <member name="M:TerraTechETCUtil.Utilities.SubToBlockAttachConnected(TankBlock,System.Action,System.Action)">
             <summary>
             When a ExtModule must respond to block attach updates, use this.
-            For block attachment updates when Tank is set to a valid reference.
+            <para>For block attachment updates when Tank is set to a valid reference.</para>
             </summary>
             <param name="TB">TankBlock instance</param>
             <param name="attachEvent">Action to call on block attach.</param>
@@ -10822,11 +11665,91 @@
         <member name="M:TerraTechETCUtil.Utilities.UnSubToBlockAttachConnected(TankBlock,System.Action,System.Action)">
             <summary>
             When a ExtModule no longer needs to respond to block attach updates, use this.
-            For block attachment updates when Tank is set to a valid reference.
+            <para>For block attachment updates when Tank is set to a valid reference.</para>
             </summary>
             <param name="TB">TankBlock instance</param>
             <param name="attachEvent">Action to call on block attach.</param>
             <param name="detachEvent">Action to call on block detach.</param>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.SubToLogicReceiverCircuitUpdate``1(``0,System.Action{Circuits.BlockChargeData},System.Boolean,System.Boolean)">
+            <summary>
+            Sub/Unsub to a block's circuits system for Circuit updates (5x a frame)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="module"></param>
+            <param name="OnRec"></param>
+            <param name="unsub">Set this to true if we unsubscribe instead</param>
+            <param name="collectAPSpecificData"></param>
+            <returns>True if it performed it</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.SubToLogicReceiverFrameUpdate``1(``0,System.Action{Circuits.BlockChargeData},System.Boolean,System.Boolean)">
+            <summary>
+            Sub/Unsub to a block's circuits system for frame-based updates
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="module"></param>
+            <param name="OnRec"></param>
+            <param name="unsub">Set this to true if we unsubscribe instead</param>
+            <param name="collectAPSpecificData"></param>
+            <returns>True if it performed it</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.IterateExtModules``1(BlockManager)">
+            <summary>
+            Iterates <see cref="T:TerraTechETCUtil.ExtModule"/>s
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="BM"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.IterateChildModules``1(BlockManager)">
+            <summary>
+            Iterates <see cref="T:TerraTechETCUtil.ChildModule"/>s
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="BM"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.GetExtModules``1(BlockManager)">
+            <summary>
+            Gets a list of <see cref="T:TerraTechETCUtil.ExtModule"/>s
+            <para><b>CREATES A NEW LIST</b></para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="BM"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.GetChildModules``1(BlockManager)">
+            <summary>
+            Gets a list of <see cref="T:TerraTechETCUtil.ChildModule"/>s
+            <para><b>CREATES A NEW LIST</b></para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="BM"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.WithinBox(UnityEngine.Vector3,System.Single)">
+            <summary>
+            Check to see if <paramref name="vec"/> is within a cube at origin defined by <paramref name="extents"/>
+            </summary>
+            <param name="vec"></param>
+            <param name="extents"></param>
+            <returns>True if it is within the box</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.GetUnloadedTech(TrackedVisible)">
+            <summary>
+            Get an unloaded tech representation of a <see cref="T:TrackedVisible"/>
+            </summary>
+            <param name="TV"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.TrySetBlockFlag(TankBlock,TankBlock.Flags,System.Boolean)">
+            <summary>
+            Set the block flag on a block
+            </summary>
+            <param name="block"></param>
+            <param name="flag"></param>
+            <param name="trueState"></param>
+            <exception cref="T:System.NullReferenceException"></exception>
         </member>
         <member name="M:TerraTechETCUtil.Utilities.GetLookupList(TerrainObjectTable)">
             <summary>
@@ -10853,7 +11776,7 @@
             <para>For more advanced operations, see:</para> 
             <para><list type="bullet">
             <item>For simple <seealso cref="T:UnityEngine.GameObject"/><b>-only</b> extraction <seealso cref="M:TerraTechETCUtil.GameObjectDocumentator.GetHierachyAndPrintToLog(UnityEngine.GameObject,System.Int32,TerraTechETCUtil.SlashState,System.Boolean)"/></item>
-            <item>For detailed extraction - <seealso cref="M:TerraTechETCUtil.AutoDataExtractor.#ctor(System.String,System.Type,System.Object,System.Collections.Generic.HashSet{System.Object})"/></item></list></para>
+            <item>For detailed extraction - <seealso cref="!:AutoDataExtractor.AutoDataExtractor(string, Type, object, HashSet&lt;object&gt;)"/></item></list></para>
             </summary>
             <typeparam name="T">The <see cref="T:System.Type"/> to search for.</typeparam>
             <param name="GO">The <see cref="T:UnityEngine.GameObject"/> to search through.</param>
@@ -11773,8 +12696,8 @@
             <summary>
             Gets the localization based off of a getter function
             </summary>
-            <param name="english"></param>
-            <param name="getString"></param>
+            <param name="english">The english lookup that will be used for all lookups. Cannot leave null or empty</param>
+            <param name="getString">Function that returns the string. Must NEVER return null.</param>
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringFunc.ToString">
             <inheritdoc/>
@@ -11805,16 +12728,17 @@
             <summary>
             Create a <see cref="T:TerraTechETCUtil.LocExtStringMod"/> for localisation text in a mod
             </summary>
-            <param name="stringByLang">Languages to string</param>
-            <param name="category"></param>
+            <param name="stringByLang">Languages to string. 
+            <para><b>MUST contain <see cref="F:LocalisationEnums.Languages.English"/> or <see cref="F:LocalisationEnums.Languages.US_English"/></b></para></param>
+            <param name="category">Specific category to inject this into.  Leave unset to use like normal</param>
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringMod.#ctor(System.String,LocalisationEnums.StringBanks)">
             <summary>
             Create a <see cref="T:TerraTechETCUtil.LocExtStringMod"/> for localisation text in a mod
             <para>English-only quick version with no actual localisation</para>
             </summary>
-            <param name="englishTranslation"></param>
-            <param name="category"></param>
+            <param name="englishTranslation">The english lookup that will be used for all lookups. Cannot leave null or empty</param>
+            <param name="category">Specific category to inject this into.  Leave unset to use like normal</param>
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringMod.#ctor(LocalisationEnums.StringBanks,System.Int32)">
             <summary>
@@ -11868,9 +12792,9 @@
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringNonReg.#ctor(System.String)">
             <summary>
-            
+            <inheritdoc cref="T:TerraTechETCUtil.LocExtStringNonReg"/>
             </summary>
-            <param name="english"></param>
+            <param name="english">The english lookup that will be used for all lookups. Cannot leave null or empty</param>
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringNonReg.ToString">
             <inheritdoc/>
@@ -11915,8 +12839,14 @@
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringVanilla.#ctor(System.String,LocalisationEnums.StringBanks,System.Int32)">
             <summary>
-            ONLY FOR VANILLA ENTRY REFERENCING
+            <inheritdoc cref="T:TerraTechETCUtil.LocExtStringVanilla"/>
+            <b>ONLY FOR VANILLA ENTRY REFERENCING</b>
             </summary>
+            <param name="englishFallback">The english lookup that will be used for all lookups. Cannot leave null or empty</param>
+            <param name="category">Specific category to inject this into.</param>
+            <param name="stringID">The raw lookup ID of this string in the database</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentException"></exception>
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringVanilla.ToString">
             <inheritdoc/>
@@ -11949,7 +12879,8 @@
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringVanillaOT.#ctor(ObjectTypes,System.Int32)">
             <summary>
-            ONLY FOR VANILLA ENTRY REFERENCING
+            <inheritdoc cref="T:TerraTechETCUtil.LocExtStringVanillaOT"/>
+            <b>ONLY FOR VANILLA ENTRY REFERENCING</b>
             </summary>
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringVanillaOT.ToString">
@@ -11996,15 +12927,15 @@
             Creates a <see cref="T:TerraTechETCUtil.LocExtStringVanillaText"/> for displaying vanilla localized text on modded UI interfaces.
             <para>Registered automatically</para>
             </summary>
-            <param name="englishFallback"></param>
-            <param name="LS"></param>
+            <param name="englishFallback">The english lookup that will be used for all lookups. Cannot leave null or empty</param>
+            <param name="LS"><see cref="T:LocalisedString"/> to convert. Cannot leave null.</param>
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringVanillaText.#ctor(LocalisedString)">
             <summary>
             Creates a <see cref="T:TerraTechETCUtil.LocExtStringVanillaText"/> for displaying vanilla localized text on modded UI interfaces.
             <para>Registered automatically</para>
             </summary>
-            <param name="LS"></param>
+            <param name="LS"><see cref="T:LocalisedString"/> to convert. Cannot leave null.</param>
         </member>
         <member name="M:TerraTechETCUtil.LocExtStringVanillaText.ToString">
             <inheritdoc/>

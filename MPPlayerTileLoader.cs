@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TerraTechETCUtil;
 using UnityEngine;
 
@@ -21,7 +18,7 @@ namespace Better_Servers
         public bool Valid() => lastTileWP.TileCoord != IntVector2.invalid;//player != null;
         public void GetActiveTiles(List<IntVector2> tiles)
         {
-            if (player?.CurTech?.tech != null)
+            if (player?.CurTech?.tech?.visible != null)
                 lastTileWP = WorldPosition.FromScenePosition(player.CurTech.tech.boundsCentreWorldNoCheck);
             ManWorldTileExt.GetActiveTilesAround(tiles, lastTileWP, MPKingdomsTest.PlayerTileLoadDistOuter);
         }

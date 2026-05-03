@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using FMOD;
-using Newtonsoft.Json;
-using Payload.UI.Commands;
 using SafeSaves;
 using TerraTech.Network;
 using TerraTechETCUtil;
 using UnityEngine;
 using UnityEngine.Networking;
-using static MapGenerator;
 
 namespace Better_Servers
 {
@@ -39,9 +32,10 @@ namespace Better_Servers
 
 
         public static NetPlayer localPlayer => ManNetwork.inst?.MyPlayer;
-        public static bool FakePlayerOrigin = false;
+        public static bool FakePlayerOrigin = true;
         public static bool ExtendENTIRERadiusAll = false;
-        public static bool FoundOurLocalPlayer = false;
+        public const int FoundOurLocalPlayerTimerEnd = 60;
+        public static int FoundOurLocalPlayerTimer = 0;
 
         /// <summary>
         /// Sets how far each player loads tiles for.
@@ -103,7 +97,7 @@ namespace Better_Servers
         /// </summary>
         private static void ActivateKingdoms(Mode mode)
         {
-            FoundOurLocalPlayer = false;
+            FoundOurLocalPlayerTimer = 0;
             /*
             if (mode.GetGameType() == ManGameMode.GameType.CoOpCampaign)
                 ExtendAll<ModeCoOpCampaign>(mode);
@@ -311,6 +305,8 @@ namespace Better_Servers
         /// </summary>
         private static void UpdateAllPlayers()
         {
+            if (Singleton.playerTank != null && FoundOurLocalPlayerTimer <= FoundOurLocalPlayerTimerEnd)
+                FoundOurLocalPlayerTimer++;
             foreach (var item in inst.PlayerData)
             {
                 item.Value.UpdateUser();
@@ -549,7 +545,7 @@ namespace Better_Servers
         private static void UpdateClientWorldBoarder()
         {
             Tank tank = Singleton.playerTank;
-            if (tank != null && FoundOurLocalPlayer && !ManNetwork.inst.MyPlayer.IsSwitchingTech)
+            if (tank != null && FoundOurLocalPlayerTimer > 120 && !ManNetwork.inst.MyPlayer.IsSwitchingTech)
             {
                 Vector3 originDelta = (OurPlayerPos - BarrierOrigin.ScenePosition).SetY(0);
                 if (originDelta.magnitude > TPDistanceDefault + 25)
@@ -592,7 +588,7 @@ namespace Better_Servers
                     DebugBeS.Log("First setup server barrier " + WP.TileCoord);
                     BarrierOrigin = WP;
                     DoMoveBarrier(BarrierOrigin.ScenePosition, true);
-                    FoundOurLocalPlayer = true;
+                    FoundOurLocalPlayerTimer = 0;
                     return true;
                 }
                 else if (localPlayer == player)
@@ -601,7 +597,7 @@ namespace Better_Servers
                     KickStartBetterServers.SendChatOurClientOnly("Server barrier set " + WP.TileCoord);
                     BarrierOrigin = WP;
                     DoMoveBarrier(BarrierOrigin.ScenePosition, true);
-                    FoundOurLocalPlayer = true;
+                    FoundOurLocalPlayerTimer = 0;
                     return true;
                 }
             }
@@ -634,8 +630,8 @@ namespace Better_Servers
             DebugBeS.Info("Set clientside barrier to " + command.m_Position.TileCoord);
             BarrierOrigin = command.m_Position;
             KickStartBetterServers.SendChatOurClientOnly("Client barrier set " + BarrierOrigin.TileCoord);
-            DoMoveBarrier(BarrierOrigin.ScenePosition, !FoundOurLocalPlayer);
-            FoundOurLocalPlayer = true;
+            DoMoveBarrier(BarrierOrigin.ScenePosition, FoundOurLocalPlayerTimer < FoundOurLocalPlayerTimerEnd);
+            FoundOurLocalPlayerTimer = 0;
             return true;
         }
 

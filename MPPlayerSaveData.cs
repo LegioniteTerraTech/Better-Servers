@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TerraTechETCUtil;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace Better_Servers
 {
@@ -15,7 +11,7 @@ namespace Better_Servers
     /// </summary>
     public class MPPlayerSaveData
     {
-        public const int MaxLoadingAttempts = 8;
+        public const float MaxLoadingTime = 5f;
 
         public string playerID;
         /// <summary> Serialized position </summary>
@@ -29,8 +25,8 @@ namespace Better_Servers
         [JsonIgnore]
         public NetTech directTech;
         [JsonIgnore]
-        public int loadingAttempts = 0;
-        public bool GaveUpOnTechSearch => loadingAttempts > MaxLoadingAttempts;
+        public float giveUpTime = 0;
+        public bool ShouldGiveUpOnTechSearch => giveUpTime < Time.time;
 
         [JsonIgnore]
         public MPPlayerTileLoader tileLoader = null;
@@ -46,7 +42,7 @@ namespace Better_Servers
             var tech = directTech?.tech;
             if (tech != null)
             {
-                tankID = tech.visible.ID;
+                tankID = tech.netTech.HostID;
                 position = WorldPosition.FromScenePosition(tech.boundsCentreWorldNoCheck);
             }
         }
@@ -64,7 +60,7 @@ namespace Better_Servers
             {
                 DebugBeS.Log("Player " + inst.name + " is the server host");
                 MPKingdomsTest.BarrierOrigin = position;
-                MPKingdomsTest.FoundOurLocalPlayer = true;
+                MPKingdomsTest.FoundOurLocalPlayerTimer = 0;
             }
             MPKingdomsTest.TryMoveBarrier(directPlayer, position);
             TryRushPlayerLoadingArea();
@@ -86,7 +82,7 @@ namespace Better_Servers
             DebugBeS.Log("Player " + inst.name + " joined, now loading their data...");
             directPlayer = inst;
             lastName = inst.name;
-            loadingAttempts = 0;
+            giveUpTime = Time.time + MaxLoadingTime;
             CurTileCoord = position.TileCoord;
 
             tileLoader = new MPPlayerTileLoader(inst, CurTileCoord);
@@ -106,9 +102,9 @@ namespace Better_Servers
 
             ManWorldTileExt.ClientUnregisterDynamicTileLoader(tileLoader);
             tileLoader = null;
-            if (directTech?.tech != null)
+            if (directTech?.tech?.visible != null && directTech.tech.visible.isActive)
             {
-                tankID = directTech.tech.visible.ID;
+                tankID = directTech.tech.netTech.HostID;
                 position = WorldPosition.FromScenePosition(directTech.tech.boundsCentreWorldNoCheck);
             }
             directPlayer = null;
@@ -133,11 +129,11 @@ namespace Better_Servers
                 return;
             }
             if (tankID == int.MinValue)
-            {
-                if (directPlayer.CurTech?.tech != null)
+            {   // We have no tech saved
+                if (directPlayer.CurTech?.tech?.visible != null && directTech.tech.visible.isActive)
                 {
                     DebugBeS.Log(lastName + " has an assigned Tech, and we are linking it now");
-                    tankID = directPlayer.CurTech.tech.visible.ID;
+                    tankID = directPlayer.CurTech.tech.netTech.HostID;
                     directTech = directPlayer.CurTech;
                 }
                 else
@@ -153,9 +149,14 @@ namespace Better_Servers
                 {
                     if (TV.visible?.tank?.netTech != null)
                     {
-                        DebugBeS.Log(lastName + " has a loaded Tech in the world, and we are linking it now");
-                        directTech = TV.visible.tank.netTech;
-                        LastDeathReason = null;
+                        if (!ShouldGiveUpOnTechSearch && tankID != TV.visible.tank.netTech.HostID)
+                            DebugBeS.Log(lastName + " has a different ID assigned Tech??? Ignoring...");
+                        else
+                        {
+                            DebugBeS.Log(lastName + " has a loaded Tech in the world, and we are linking it now");
+                            directTech = TV.visible.tank.netTech;
+                            LastDeathReason = null;
+                        }
                         return;
                     }
                     //else
@@ -172,37 +173,42 @@ namespace Better_Servers
                 return;
             }
             if (tankID == int.MinValue)
-            {
-                if (directPlayer.CurTech?.tech != null)
+            {   // We have no tech saved
+                if (directPlayer.CurTech?.tech?.visible != null && directTech.tech.visible.isActive)
                 {
                     DebugBeS.Log(lastName + " has an assigned Tech, and we are re-linking it now");
-                    tankID = directPlayer.CurTech.tech.visible.ID;
+                    tankID = directPlayer.CurTech.tech.netTech.HostID;
                     directTech = directPlayer.CurTech;
                 }
                 else
                 {
                     DebugBeS.Log(lastName + " does not have an assigned Tech");
-                    loadingAttempts = 9001;
+                    giveUpTime = 0;
                     return;
                 }
             }
-            if (directTech?.tech != null)
+            if (directTech?.tech?.visible != null && directTech.tech.visible.isActive)
             {
                 directPlayer.ServerSetTech(directTech, false);
                 DebugBeS.Log("Found Tech for " + lastName + " and directly linking to Tech " + directTech.tech.name);
                 return;
             }
             else
-            {
+            {   // We have a tech!
                 var TV = ManVisible.inst.GetTrackedVisible(tankID);
                 if (TV != null)
                 {
                     if (TV.visible?.tank?.netTech != null)
                     {
-                        directTech = TV.visible.tank.netTech;
-                        directPlayer.ServerSetTech(directTech, false);
-                        LastDeathReason = null;
-                        DebugBeS.Log("Found Tech for " + lastName + " and load linking to Tech " + directTech.tech.name);
+                        if (!ShouldGiveUpOnTechSearch && tankID != TV.visible.tank.netTech.HostID)
+                            DebugBeS.Log(lastName + " has a different ID assigned Tech??? Ignoring...");
+                        else
+                        {
+                            directTech = TV.visible.tank.netTech;
+                            directPlayer.ServerSetTech(directTech, false);
+                            LastDeathReason = null;
+                            DebugBeS.Log("Found Tech for " + lastName + " and load linking to Tech " + directTech.tech.name);
+                        }
                         return;
                     }
                     else
@@ -223,7 +229,7 @@ namespace Better_Servers
                 DebugBeS.Warning("TryJumpPlayerToTech() called whilist directPlayer IS NULL");
                 return;
             }
-            if (GaveUpOnTechSearch)
+            if (ShouldGiveUpOnTechSearch)
             {
                 DebugBeS.Warning("FAILED to load Tech for " + lastName + "!");
                 if (!LastDeathReason.NullOrEmpty())
@@ -232,27 +238,32 @@ namespace Better_Servers
                 }
                 return;
             }
-            loadingAttempts++;
             var TV = ManVisible.inst.GetTrackedVisible(tankID);
             if (TV != null)
             {
                 if (TV.visible?.tank?.netTech != null)
                 {
-                    directTech = TV.visible.tank.netTech;
-                    directPlayer.ServerSetTech(directTech, false);
-                    DebugBeS.Log("[" + loadingAttempts + "] Found Tech for " + lastName + " and load linking to Tech " + directTech.tech.name);
+                    if (!ShouldGiveUpOnTechSearch && tankID != TV.visible.tank.netTech.HostID)
+                        DebugBeS.Log(lastName + " has a different ID assigned Tech??? Ignoring...");
+                    else
+                    {
+                        directTech = TV.visible.tank.netTech;
+                        directPlayer.ServerSetTech(directTech, false);
+                        LastDeathReason = null;
+                        DebugBeS.Log("[" + (Time.time - giveUpTime + MaxLoadingTime).ToString("0.00") + "] Found Tech for " + lastName + " and load linking to Tech " + directTech.tech.name);
+                    }
                     return;
                 }
                 else
                 {
                     InvokeHelper.Invoke(TryJumpPlayerToTech, 1);
                     KeepRushingPlayerLoadingArea();
-                    DebugBeS.Log("[" + loadingAttempts + "] Trying to load Tech for " + lastName + " as it is far away");
+                    DebugBeS.Log("[" + (Time.time - giveUpTime + MaxLoadingTime).ToString("0.00") + "] Trying to load Tech for " + lastName + " as it is far away");
                     return;
                 }
             }
             // No tech exists!
-            DebugBeS.Log("[" + loadingAttempts + "] Could not find assigned Tech for " + lastName);
+            DebugBeS.Log("[" + (Time.time - giveUpTime + MaxLoadingTime).ToString("0.00") + "] Could not find assigned Tech for " + lastName);
         }
 
         internal void UpdateUser()
@@ -262,9 +273,9 @@ namespace Better_Servers
                 if (directPlayer.CurTech != directTech)
                 {
                     directTech = directPlayer.CurTech;
-                    if (directTech?.tech != null)
+                    if (directTech?.tech?.visible != null && directTech.tech.visible.isActive)
                     {
-                        tankID = directTech.tech.visible.ID;
+                        tankID = directTech.tech.netTech.HostID;
                     }
                     else
                         tankID = int.MinValue;
@@ -289,7 +300,7 @@ namespace Better_Servers
         /// </summary>
         private void UpdatePlayerBarrier_SERVER()
         {
-            if (directPlayer?.CurTech?.tech != null)
+            if (directPlayer?.CurTech?.tech?.visible != null && directTech.tech.visible.isActive)
             {   // Our managed player has a fully ready Tech assigned to them!
                 WorldPosition WP = WorldPosition.FromScenePosition(directPlayer.CurTech.tech.boundsCentreWorldNoCheck);
                 IntVector2 newCoord = WP.TileCoord;
@@ -318,7 +329,7 @@ namespace Better_Servers
             foreach (var item in pos.IterateRectVolume(new IntVector2(
                 MPKingdomsTest.MinTileLoaderRadius, MPKingdomsTest.MinTileLoaderRadius)))
             {
-                ManWorldTileExt.ClientTempLoadTile(item, true, MaxLoadingAttempts);
+                ManWorldTileExt.ClientTempLoadTile(item, true, MaxLoadingTime);
             }
         }
         private void KeepRushingPlayerLoadingArea()

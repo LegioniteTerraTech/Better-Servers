@@ -11,8 +11,6 @@ using HarmonyLib;
 using Newtonsoft.Json;
 using TerraTechETCUtil;
 using SafeSaves;
-using Snapshots;
-using System.Runtime.CompilerServices;
 
 /// <summary>
 /// This mod is for TerraTech's Steam Workshop only.  
@@ -460,7 +458,7 @@ namespace Better_Servers
             string infract = "INFRACTION: " + offendingPlayer.name + " has violated " + infraction + " for the following: " + desc;
             try
             {
-                UIHelpersExt.BigF5broningBanner(offendingPlayer.name + " - INFRACTION", false);
+                UIHelpersExt.BigF5broningBannerMP(offendingPlayer.name + " - INFRACTION", false);
                 return SendChatServer(infract);
             }
             catch { }

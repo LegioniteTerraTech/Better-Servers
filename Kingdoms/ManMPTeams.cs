@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Better_Servers
 {   // This is for separate teams in campaign.  Unlikely to ever be finished.
