@@ -435,95 +435,6 @@
             <param name="ToColor">string to color</param>
             <returns>the given string with the color formatting around it</returns>
         </member>
-        <member name="T:TerraTechETCUtil.ModDataHandle">
-            <summary>
-            Keeps track of mod data for easy comperisons and access
-            </summary>
-        </member>
-        <member name="F:TerraTechETCUtil.ModDataHandle.ModID">
-            <summary>
-            The ModID of the ModDataHandle
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.GetHashCode">
-            <inheritdoc/>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.op_Equality(TerraTechETCUtil.ModDataHandle,TerraTechETCUtil.ModDataHandle)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.op_Inequality(TerraTechETCUtil.ModDataHandle,TerraTechETCUtil.ModDataHandle)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.Equals(System.Object)">
-            <inheritdoc/>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.#ctor(System.String)">
-            <summary>
-            Creates a ModDataHandle for the given mod
-            </summary>
-            <param name="modID">The actual ModID for the mod, usually not the display name of the mod</param>
-            <exception cref="T:System.NullReferenceException">The mod does not exist now</exception>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.GetModContainer">
-            <summary>
-            Get the ModContainer
-            </summary>
-            <returns>The mod</returns>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.SubToModsPreLoad(System.Action)">
-            <summary>
-            Subscribe an event to BEFORE all mods load
-            </summary>
-            <param name="preEvent"></param>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.SubToModsPostLoad(System.Action)">
-            <summary>
-            Subscribe an event to AFTER all mods are loaded
-            </summary>
-            <param name="postEvent"></param>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.SubToBlocksPostChange(System.Action)">
-            <summary>
-            Subscribe an event to AFTER all blocks are loaded
-            </summary>
-            <param name="postEvent"></param>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.GetModName">
-            <summary>
-            Return the ModID
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.DebugLogModContents">
-            <summary>
-            Log this mod's contents in the game's output_log.txt
-            </summary>
-            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.LookIntoModContents(ModContainer)"/>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.GetModTexture(System.String)">
-            <summary>
-            Try get a resource from this mod's container
-            </summary>
-            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.GetTextureFromModAssetBundle(ModContainer,System.String,System.Boolean,System.Boolean)"/>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.GetModObject``1(System.String)">
-            <summary>
-            Try get a resource from this mod's container
-            </summary>
-            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.GetObjectFromModContainer``1(ModContainer,System.String)"/>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.GetModObjects``1">
-            <summary>
-            Try iterate resources in this mod's container
-            </summary>
-            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.IterateAssetsInModContainer``1(ModContainer)"/>
-        </member>
-        <member name="M:TerraTechETCUtil.ModDataHandle.GetModObjects``1(System.String)">
-            <summary>
-            Try iterate resources in this mod's container
-            </summary>
-            <param name="nameNoExt">The start of the <see cref="P:UnityEngine.Object.name"/> to look for</param>
-            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.IterateAssetsInModContainer``1(ModContainer,System.String)"/>
-        </member>
         <member name="T:TerraTechETCUtil.ResourcesHelper">
             <summary>
             Use this to get resources from both modded and the base game
@@ -536,46 +447,6 @@
         </member>
         <member name="F:TerraTechETCUtil.ResourcesHelper.BlockFolderJsonFlag">
             <summary>Add as a post or prefix to flag it as an additional asset item</summary>
-        </member>
-        <member name="T:TerraTechETCUtil.ResourcesHelper.RelayEvent">
-            <summary>
-            Special event for <see cref="N:TerraTechETCUtil"/>, similar to <see cref="T:UnityEngine.Event"/>
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.ResourcesHelper.RelayEvent.Send">
-            <summary>
-            Send it to all recipients
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.ResourcesHelper.RelayEvent.Subscribe(System.Action)">
-            <summary>
-            Add a recipient
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.ResourcesHelper.RelayEvent.Unsubscribe(System.Action)">
-            <summary>
-            Remove a recipient
-            </summary>
-        </member>
-        <member name="F:TerraTechETCUtil.ResourcesHelper.ModsPreLoadEvent">
-            <summary>
-            Called before mods are loaded
-            </summary>
-        </member>
-        <member name="P:TerraTechETCUtil.ResourcesHelper.BlocksPostChangeEvent">
-            <summary>
-            Called after blocks are loaded
-            </summary>
-        </member>
-        <member name="P:TerraTechETCUtil.ResourcesHelper.ModsPostLoadEvent">
-            <summary>
-            Called after mods are loaded
-            </summary>
-        </member>
-        <member name="F:TerraTechETCUtil.ResourcesHelper.ModsUpdateEvent">
-            <summary>
-            Called every time the <see cref="M:ModBase.Update"/> is called
-            </summary>
         </member>
         <member name="M:TerraTechETCUtil.ResourcesHelper.GetAllMods">
             <summary>
@@ -1334,6 +1205,19 @@
             Block counts equal to and above this are flagged as <b>Eradicator</b> with <see cref="F:TerraTechETCUtil.BasePurpose.NANI"/>
             </summary>
         </member>
+        <member name="F:TerraTechETCUtil.RawTechUtil.DefaultBT">
+            <summary>
+            <b><see cref="F:BlockTypes.GSOAIController_111"/></b>, the default null state for <see cref="T:BlockTypes"/>
+            </summary>
+            <returns><b><see cref="F:BlockTypes.GSOAIController_111"/></b>, the default null state for <see cref="T:BlockTypes"/></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.RawTechUtil.IsDefault(BlockTypes)">
+            <summary>
+            Check if the <seealso cref="T:BlockTypes"/> is <inheritdoc cref="F:TerraTechETCUtil.RawTechUtil.DefaultBT"/>
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
         <member name="M:TerraTechETCUtil.RawTechUtil.GetOrthoR(TankPreset.BlockSpec)">
             <summary>
             get the CORRECT <see cref="T:OrthoRotation.r"/>
@@ -1411,13 +1295,13 @@
             <summary>
             Get the first block in the given <see cref="T:System.Collections.Generic.List`1"/>
             </summary>
-            <returns>The first block if found, otherwise fallback invalid <see cref="F:BlockTypes.GSOAIController_111"/></returns>
+            <returns>The first block if found, otherwise fallback invalid <inheritdoc cref="F:TerraTechETCUtil.RawTechUtil.DefaultBT"/></returns>
         </member>
         <member name="M:TerraTechETCUtil.RawTechUtil.GetFirstBlock(System.Collections.Generic.List{TerraTechETCUtil.RawBlock})">
             <summary>
             Get the first block in the given <see cref="T:System.Collections.Generic.List`1"/>
             </summary>
-            <returns>The first block if found, otherwise fallback invalid <see cref="F:BlockTypes.GSOAIController_111"/></returns>
+            <returns>The first block if found, otherwise fallback invalid <inheritdoc cref="F:TerraTechETCUtil.RawTechUtil.DefaultBT"/></returns>
         </member>
         <member name="M:TerraTechETCUtil.RawTechUtil.ValidateBlocksInTech(TerraTechETCUtil.RawTechTemplate,System.Boolean,System.Boolean)">
             <summary>
@@ -1429,6 +1313,52 @@
             <param name="throwOnFail">Make this throw an <see cref="T:System.Exception"/> if it fails</param>
             <returns></returns>
             <exception cref="T:System.Exception">If <paramref name="throwOnFail"/> is true, this will throw an exception for you to catch later</exception>
+        </member>
+        <member name="T:TerraTechETCUtil.RawTechUtil.Status">
+            <summary> Status of the checked RawTech </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.RawTechUtil.Status.Invalid">
+            <summary> unknown state, presumed not available </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.RawTechUtil.Status.HasModded">
+            <summary> Has modded blocks </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.RawTechUtil.Status.MissingBlocks">
+            <summary> Has missing blocks </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.RawTechUtil.Status.HasAnyBlocks">
+            <summary> Good To Go </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.RawTechUtil.Status.BypassedCheck">
+            <summary> Good To Go </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.RawTechUtil.HasModded(TerraTechETCUtil.RawTechUtil.Status)">
+            <summary> Check to see if the RawTech is has any modded blocks </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.RawTechUtil.MissingBlocks(TerraTechETCUtil.RawTechUtil.Status)">
+            <summary> Check to see if the RawTech is missing any blocks </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.RawTechUtil.CanLoadAnyBlocks(TerraTechETCUtil.RawTechUtil.Status)">
+            <summary> Check to see if the RawTech is safe to load in our current session.
+            <para>DOES NOT MEAN THE TECH CAN LOAD IN ENTIRELY</para></summary>
+        </member>
+        <member name="M:TerraTechETCUtil.RawTechUtil.CanLoadEntirely(TerraTechETCUtil.RawTechUtil.Status)">
+            <summary> Check to see if the <b>ENTIRE</b> RawTech is safe to load in our current session. </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.RawTechUtil.BypassedCheck(TerraTechETCUtil.RawTechUtil.Status)">
+            <summary> Check to see if the RawTech bypassed the safety check. </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.RawTechUtil.ValidateBlocksInTech_Internal(System.Collections.Generic.List{TerraTechETCUtil.RawBlockMem},TerraTechETCUtil.RawTechBase,System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="nonAlloc"></param>
+            <param name="templateToCheck"></param>
+            <param name="removeInvalid">Set this to true to remove invalid blocks, 
+            otherwise it will stop loading the tech as soon as an invalid block is encountered</param>
+            <param name="throwOnFail">Make this throw an <see cref="T:System.Exception"/> if it fails</param>
+            <exception cref="T:System.Exception">If <paramref name="throwOnFail"/> is true, this will throw an exception for you to catch later</exception>
+            <returns></returns>
         </member>
         <member name="T:TerraTechETCUtil.RawBlockBase">
             <summary>
@@ -2040,7 +1970,7 @@
             <summary>
             Get the first block on this
             </summary>
-            <returns>The first block if found, otherwise fallback invalid <see cref="F:BlockTypes.GSOAIController_111"/></returns>
+            <returns>The first block if found, otherwise fallback invalid <inheritdoc cref="F:TerraTechETCUtil.RawTechUtil.DefaultBT"/></returns>
         </member>
         <member name="M:TerraTechETCUtil.RawTech.Re_Referencing(BlockTypes,BlockTypes)">
             <summary>
@@ -2081,12 +2011,13 @@
         <member name="M:TerraTechETCUtil.RawTech.SpawnRawTech(UnityEngine.Vector3,System.Int32,UnityEngine.Vector3,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
             <inheritdoc/>
         </member>
-        <member name="M:TerraTechETCUtil.RawTech.InsureValid(System.Boolean,System.Boolean)">
+        <member name="M:TerraTechETCUtil.RawTech.InsureValid(System.Boolean,System.Boolean,System.Boolean)">
             <summary>
-            
+            Insures that the RawTech is <b>loadable</b>, without ensuring that it is complete.
             </summary>
             <param name="removeInvalid"></param>
             <param name="throwOnFail"></param>
+            <param name="ensureComplete"></param>
             <exception cref="T:System.InvalidOperationException"></exception>
         </member>
         <member name="M:TerraTechETCUtil.RawTech.ValidateBlocksInTech(System.Boolean,System.Boolean)">
@@ -2656,7 +2587,7 @@
         <member name="T:TerraTechETCUtil.RawTechTemplate">
             <summary>
             <inheritdoc/>
-            <para>This is the ACTIVE <see cref="T:TerraTechETCUtil.RawTechBase"/>. For the serialized version see <see cref="T:TerraTechETCUtil.RawTechTemplate"/></para>
+            <para>This is the SERIALIZED <see cref="T:TerraTechETCUtil.RawTechBase"/>. For the active version see <see cref="T:TerraTechETCUtil.RawTech"/></para>
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.RawTechTemplate.savedTech">
@@ -2734,6 +2665,234 @@
         </member>
         <member name="F:TerraTechETCUtil.Debug_TTExt.ShouldLogBiomeGen">
             <summary> log for <b>ManWorldGeneratorExt</b> </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.IModPreloadable">
+            <summary>
+            For preloading things on the title screen 
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.IModPreloadable.ModHandle">
+            <summary>
+            The handle of the mod incase it fails
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.IModPreloadable.ChainFail">
+            <summary>
+            If this fails, abort all other mods loading
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.IModPreloadable.OnFail">
+            <summary>
+            Called when it fails
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.IModPreloadable.Subject">
+            <summary>
+            The name of the subject to display
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.IModPreloadable.InProgress">
+            <summary>
+            String to display on the screen whilist this is in progress
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.IModPreloadable.EstPercentDone">
+            <summary>
+            Estimated percent done.  Usually <see cref="P:TerraTechETCUtil.IModPreloadable.EstNumSteps"/> / <see cref="P:TerraTechETCUtil.IModPreloadable.EstNumStepsIterator"/>
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.IModPreloadable.EstNumSteps">
+            <summary>
+            The estimated number of steps this has to go through to display on the progress bar.
+            <para>Leave at 0 to hide</para>
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.IModPreloadable.EstNumStepsIterator">
+            <summary>
+            The estimated number of steps this has already gon through to display on the progress bar
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.IModPreloadable.GetEnumerator">
+            <summary>
+            The iterator function to run whilist this is in the queue.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TerraTechETCUtil.ModDataHandle">
+            <summary>
+            Keeps track of mod data for easy comperisons and access
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ModDataHandle.ModID">
+            <summary>
+            The ModID of the ModDataHandle
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.op_Equality(TerraTechETCUtil.ModDataHandle,TerraTechETCUtil.ModDataHandle)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.op_Inequality(TerraTechETCUtil.ModDataHandle,TerraTechETCUtil.ModDataHandle)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.#ctor(System.String)">
+            <summary>
+            Creates a ModDataHandle for the given mod
+            </summary>
+            <param name="modID">The actual ModID for the mod, usually not the display name of the mod</param>
+            <exception cref="T:System.NullReferenceException">The mod does not exist now</exception>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.GetModContainer">
+            <summary>
+            Get the ModContainer
+            </summary>
+            <returns>The mod</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.SubToModsPreLoad(System.Action)">
+            <summary>
+            Subscribe an event to BEFORE all mods load
+            </summary>
+            <param name="preEvent"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.SubToModsPostLoad(System.Action)">
+            <summary>
+            Subscribe an event to AFTER all mods are loaded
+            </summary>
+            <param name="postEvent"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.SubToBlocksPostChange(System.Action)">
+            <summary>
+            Subscribe an event to AFTER all blocks are loaded
+            </summary>
+            <param name="postEvent"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.GetModName">
+            <summary>
+            Return the ModID
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.DebugLogModContents">
+            <summary>
+            Log this mod's contents in the game's output_log.txt
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.LookIntoModContents(ModContainer)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.GetModTexture(System.String)">
+            <summary>
+            Try get a resource from this mod's container
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.GetTextureFromModAssetBundle(ModContainer,System.String,System.Boolean,System.Boolean)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.GetModObject``1(System.String)">
+            <summary>
+            Try get a resource from this mod's container
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.GetObjectFromModContainer``1(ModContainer,System.String)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.GetModObjects``1">
+            <summary>
+            Try iterate resources in this mod's container
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.IterateAssetsInModContainer``1(ModContainer)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.ModDataHandle.GetModObjects``1(System.String)">
+            <summary>
+            Try iterate resources in this mod's container
+            </summary>
+            <param name="nameNoExt">The start of the <see cref="P:UnityEngine.Object.name"/> to look for</param>
+            <inheritdoc cref="M:TerraTechETCUtil.ResourcesHelper.IterateAssetsInModContainer``1(ModContainer,System.String)"/>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.HelperHookPatches.UILoadingScreenModProgressPatches.Update_Prefix(UILoadingScreenModProgress)">
+            <summary>
+            OverrideTheScreenToShowWeAreLoadingBiomesRN
+            </summary>
+            <param name="__instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySelectablePatches.OnPointerDown_Prefix">
+            <summary>
+            DontClickTheSelectableWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySelectablePatches.Select_Prefix">
+            <summary>
+            DontBeInteractableWhenIAmOverIMGUI2
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySelectablePatches.IsHighlighted_Prefix(System.Boolean@)">
+            <summary>
+            DontBeInteractableWhenIAmOverIMGUI3
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityButtonPatches.OnPointerClick_Prefix">
+            <summary>
+            DontClickTheButtonWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityDropdownPatches.OnPointerClick_Prefix">
+            <summary>
+            DontClickTheDropdownWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityInputFieldPatches.OnPointerClick_Prefix">
+            <summary>
+            DontClickTheInputFieldWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollbarPatches.OnPointerDown_Prefix">
+            <summary>
+            DontClickTheScrollbarWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollbarPatches.UpdateDrag_Prefix">
+            <summary>
+            DontMoveTheScrollbarWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollbarPatches.ClickRepeat_Prefix">
+            <summary>
+            DontMoveTheScrollbarWhenIAmOverIMGUI2
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollRectPatches.OnScroll_Prefix">
+            <summary>
+            DontClickTheScrollRectWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollRectPatches.OnBeginDrag_Prefix">
+            <summary>
+            DontMoveTheScrollRectWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollRectPatches.OnDrag_Prefix">
+            <summary>
+            DontMoveTheScrollRectWhenIAmOverIMGUI2
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySliderPatches.OnPointerDown_Prefix">
+            <summary>
+            DontClickTheSliderWhenIAmOverIMGUI
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySliderPatches.UpdateDrag_Prefix">
+            <summary>
+            DontClickTheSliderWhenIAmOverIMGUI2
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySliderPatches.MayDrag_Prefix(System.Boolean@)">
+            <summary>
+            DontClickTheSliderWhenIAmOverIMGUI3
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityTogglePatches.OnPointerClick_Prefix">
+            <summary>
+            DontClickTheToggleWhenIAmOverIMGUI
+            </summary>
         </member>
         <member name="T:TerraTechETCUtil.LocHelper">
             <summary>
@@ -3016,7 +3175,7 @@
             Called when menu hidden
             </summary>
         </member>
-        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.Recycle">
+        <member name="M:TerraTechETCUtil.UIMiniMapLayerExt.DoRecycle">
             <summary>
             Called when destroyed
             </summary>
@@ -3070,41 +3229,6 @@
             
             </summary>
             <param name="destroyPrefabToo"></param>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityButtonPatches.OnPointerClick_Prefix">
-            <summary>
-            DontClickTheButtonWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityDropdownPatches.OnPointerClick_Prefix">
-            <summary>
-            DontClickTheDropdownWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityInputFieldPatches.OnPointerClick_Prefix">
-            <summary>
-            DontClickTheInputFieldWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySelectablePatches.OnPointerDown_Prefix">
-            <summary>
-            DontClickTheSelectableWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityScrollbarPatches.OnPointerDown_Prefix">
-            <summary>
-            DontClickTheScrollbarWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnitySliderPatches.OnPointerDown_Prefix">
-            <summary>
-            DontClickTheSliderWhenIAmOverIMGUI
-            </summary>
-        </member>
-        <member name="M:TerraTechETCUtil.PatchBatch.UnityUIPatches.UnityTogglePatches.OnPointerClick_Prefix">
-            <summary>
-            DontClickTheToggleWhenIAmOverIMGUI
-            </summary>
         </member>
         <member name="T:TerraTechETCUtil.GameObjectDocumentator">
             <summary>
@@ -3225,14 +3349,22 @@
             Multiplier for the scale of the UI window to relative the screen when this is applied
             </summary>
         </member>
+        <member name="F:TerraTechETCUtil.UIScaler._UIScale">
+            <summary>
+            <b>DITRECT VALUE</b> multiplier for the scale of the UI's elements relative to the screen when this is applied
+            <para>The lower this is, the smaller the buttons on the UI will appear</para>
+            </summary>
+        </member>
         <member name="P:TerraTechETCUtil.UIScaler.UIScale">
             <summary>
             Multiplier for the scale of the UI's elements relative to the screen when this is applied
+            <para>The lower this is, the smaller the buttons on the UI will appear</para>
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.UIScaler.UIScaleInv">
             <summary>
             Inverted multiplier for the scale of the UI relative to the screen when this is applied
+            <para>The <b>higher</b> this is, the smaller the buttons on the UI will appear</para>
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.UIScaler.ScaledWidth">
@@ -3285,7 +3417,13 @@
             </summary>
         </member>
         <member name="M:TerraTechETCUtil.UIScaler.MouseIsOverGUIMenu(UnityEngine.Rect)">
+            <summary>
+            Check if the mouse is over the given GUI.Window Rect
+            <para>Scale is relative to this <b><see cref="P:TerraTechETCUtil.UIScaler.UIScale"/></b></para>
+            </summary>
             <inheritdoc cref="M:TerraTechETCUtil.UIHelpersExt.MouseIsOverGUIMenu(UnityEngine.Rect)"/>
+            <param name="pos"></param>
+            <returns></returns>
         </member>
         <member name="M:TerraTechETCUtil.UIScaler.GetGUIPos(UnityEngine.Vector3)">
             <summary>
@@ -3495,6 +3633,11 @@
         <member name="M:TerraTechETCUtil.TerraTechUIPatches.ManPointerPatches.OpenMenuForTarget_Prefix(ManPointer@)">
             <summary>
             StopBeingDumbRadial
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.TerraTechUIPatches.GameCursorPatches.GetCursorState_Postfix(GameCursor.CursorState@)">
+            <summary>
+            Make cursor not look interactable when over menu
             </summary>
         </member>
         <member name="M:TerraTechETCUtil.TerraTechUIPatches.TankControlPatches.OnManualTargetingEvent_Prefix">
@@ -5432,9 +5575,17 @@
             <para><b>Does not account for new blocks created in the session itself</b></para>
             </summary>
         </member>
+        <member name="M:TerraTechETCUtil.BlockIndexer.SanityCheckThrowIfFail">
+            <summary>
+            Check and throw if <see cref="P:TerraTechETCUtil.BlockIndexer.IsIndexed"/> is not true.
+            <para>This is not checked in every method call in <see cref="T:TerraTechETCUtil.BlockIndexer"/> to save on performance.</para>
+            </summary>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
         <member name="M:TerraTechETCUtil.BlockIndexer.StringToBlockType(System.String)">
             <summary>
             Searches ENTIRE GAME for the block based on root GameObject name.
+            <para><u>Before calling this for the first time</u>, make sure to check <b><see cref="P:TerraTechETCUtil.BlockIndexer.IsIndexed"/></b> or call <b><see cref="M:TerraTechETCUtil.BlockIndexer.SanityCheckThrowIfFail"/></b></para>
             </summary>
             <param name="mem">The name of the block's root GameObject.  This is also set in the Official Mod Tool by the Name ID (filename of the .json), not the name you give it.</param>
             <returns>The Block Type to use if it found it, otherwise returns BlockTypes.GSOCockpit_111</returns>
@@ -5442,6 +5593,7 @@
         <member name="M:TerraTechETCUtil.BlockIndexer.StringToBlockType(System.String,BlockTypes@)">
             <summary>
             Searches the ENTIRE GAME for the block based on root GameObject name.
+            <para><u>Before calling this for the first time</u>, make sure to check <b><see cref="P:TerraTechETCUtil.BlockIndexer.IsIndexed"/></b> or call <b><see cref="M:TerraTechETCUtil.BlockIndexer.SanityCheckThrowIfFail"/></b></para>
             </summary>
             <param name="mem">The name of the block's root GameObject.  This is also set in the Official Mod Tool by the Name ID (filename of the .json), not the name you give it.</param>
             <param name="BT">The Block Type to use if it found it</param>
@@ -5450,6 +5602,7 @@
         <member name="M:TerraTechETCUtil.BlockIndexer.StringToBIBlockType(System.String,BlockTypes@)">
             <summary>
             Searches <b>ONLY Block Injector</b> for the block based on root GameObject name.
+            <para><u>Before calling this for the first time</u>, make sure to check <b><see cref="P:TerraTechETCUtil.BlockIndexer.IsIndexed"/></b> or call <b><see cref="M:TerraTechETCUtil.BlockIndexer.SanityCheckThrowIfFail"/></b></para>
             </summary>
             <param name="mem">The name of the block's root GameObject.  This is also set in the Official Mod Tool by the Name ID (filename of the .json), not the name you give it.</param>
             <param name="BT">The Block Type to use if it found it</param>
@@ -5459,14 +5612,16 @@
             <summary>
             <para><b>ONLY CHECKS MODDED BLOCKS</b></para>
             Silent replacement for <see cref="M:ManMods.GetBlockID(System.String)"/>
+            <para><u>Before calling this for the first time</u>, make sure to check <b><see cref="P:TerraTechETCUtil.BlockIndexer.IsIndexed"/></b> or call <b><see cref="M:TerraTechETCUtil.BlockIndexer.SanityCheckThrowIfFail"/></b></para>
             </summary>
             <param name="name"></param>
-            <returns></returns>
+            <returns>The blocktype if found, otherwise the invalid block null state <inheritdoc cref="F:TerraTechETCUtil.RawTechUtil.DefaultBT"/></returns>
         </member>
         <member name="M:TerraTechETCUtil.BlockIndexer.GetBlockIDLogFree(System.String,BlockTypes@)">
             <summary>
             <para><b>ONLY CHECKS MODDED BLOCKS</b></para>
             Silent replacement for <see cref="M:ManMods.GetBlockID(System.String)"/>
+            <para><u>Before calling this for the first time</u>, make sure to check <b><see cref="P:TerraTechETCUtil.BlockIndexer.IsIndexed"/></b> or call <b><see cref="M:TerraTechETCUtil.BlockIndexer.SanityCheckThrowIfFail"/></b></para>
             </summary>
             <param name="name"></param>
             <param name="BT"></param>
@@ -5475,15 +5630,10 @@
         <member name="M:TerraTechETCUtil.BlockIndexer.GetBlockDetails(BlockTypes)">
             <summary>
             Gets the <see cref="T:TerraTechETCUtil.BlockDetails"/> for a given block, way faster than manually looking in the block for data
+            <para><u>Before calling this for the first time</u>, make sure to check <b><see cref="P:TerraTechETCUtil.BlockIndexer.IsIndexed"/></b> or call <b><see cref="M:TerraTechETCUtil.BlockIndexer.SanityCheckThrowIfFail"/></b></para>
             </summary>
             <param name="type"></param>
             <returns></returns>
-        </member>
-        <member name="M:TerraTechETCUtil.BlockIndexer.ResetBlockLookupList">
-            <summary>
-            Resets ALL the block lookup lists in <see cref="T:TerraTechETCUtil.BlockIndexer"/>.
-            <para><b>DO NOT USE UNLESS ABSOLUTELY NECESSARY</b></para>
-            </summary>
         </member>
         <member name="M:TerraTechETCUtil.BlockIndexer.ConstructBlockLookupListDelayed">
             <summary>
@@ -5493,6 +5643,13 @@
         <member name="M:TerraTechETCUtil.BlockIndexer.ConstructBlockLookupList">
             <summary>
             Builds the lookup to use when using block names to find BlockTypes
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.BlockIndexer.ResetBlockLookupList">
+            <summary>
+            Resets <b>ALL</b> the block lookup lists in <see cref="T:TerraTechETCUtil.BlockIndexer"/>.
+            <para>Modded is already handled automatically</para>
+            <para><b>DO NOT USE UNLESS ABSOLUTELY NECESSARY</b></para>
             </summary>
         </member>
         <member name="M:TerraTechETCUtil.BlockIndexer.PrepareModdedBlocksFetch">
@@ -5824,6 +5981,52 @@
             <summary>
             Right mouse button down
             </summary>
+        </member>
+        <member name="T:TerraTechETCUtil.InvokeHelper.RelayEvent">
+            <summary>
+            Special event for <see cref="N:TerraTechETCUtil"/>, similar to <see cref="T:UnityEngine.Event"/>
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.InvokeHelper.RelayEvent.Send">
+            <summary>
+            Send it to all recipients
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.InvokeHelper.RelayEvent.Subscribe(System.Action)">
+            <summary>
+            Add a recipient
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.InvokeHelper.RelayEvent.Unsubscribe(System.Action)">
+            <summary>
+            Remove a recipient
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.InvokeHelper.ModsPreLoadEvent">
+            <summary>
+            Called before mods are loaded
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.InvokeHelper.BlocksPostChangeEvent">
+            <summary>
+            Called after blocks are loaded
+            </summary>
+        </member>
+        <member name="P:TerraTechETCUtil.InvokeHelper.ModsPostLoadEvent">
+            <summary>
+            Called after mods are loaded
+            </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.InvokeHelper.ModsUpdateEvent">
+            <summary>
+            Called every time the <see cref="M:ModBase.Update"/> is called
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.InvokeHelper.PreloadThis(TerraTechETCUtil.IModPreloadable)">
+            <summary>
+            Add a mod to be showcased while loading at startup
+            </summary>
+            <param name="iterator"></param>
         </member>
         <member name="F:TerraTechETCUtil.InvokeHelper.IDErrorWindow">
             <summary>
@@ -7539,7 +7742,7 @@
         <member name="M:TerraTechETCUtil.AltUI.Window(System.Int32,UnityEngine.Rect,UnityEngine.GUI.WindowFunction,System.String,System.Single,System.Action,System.Action,System.Boolean,System.Boolean,UnityEngine.GUILayoutOption[])">
             <summary>
             Create a UI window complete with SFX and vanilla-like styling.
-            <para>Automatically manages it by</para>
+            <para>Automatically does an <seealso cref="M:TerraTechETCUtil.AltUI.StartUISharp"/> call within.</para>
             <para> Also keeps track of the cursor hovering over it so that other UI functions don't conflict with it</para>
             </summary>
             <param name="id">Unique window ID</param>
@@ -8006,7 +8209,7 @@
             Manages ChildModules on an active Projectile
             </summary>
         </member>
-        <member name="M:TerraTechETCUtil.ChildProjectile.Fire(FireData)">
+        <member name="M:TerraTechETCUtil.ChildProjectile.Fire(FireData,Tank,ModuleWeapon)">
             <inheritdoc/>
         </member>
         <member name="M:TerraTechETCUtil.ChildProjectile.WorldRemoval">
@@ -8261,16 +8464,19 @@
             Manages all <see cref="T:TerraTechETCUtil.ProjBase"/>
             </summary>
         </member>
-        <member name="F:TerraTechETCUtil.ManExtProj.deathTimerProj">
+        <member name="F:TerraTechETCUtil.ManExtProj.ProjCollider">
             <summary> Projectile getter </summary>
         </member>
-        <member name="F:TerraTechETCUtil.ManExtProj.gravityAffectProj">
+        <member name="F:TerraTechETCUtil.ManExtProj.LifeTime">
             <summary> Projectile getter </summary>
         </member>
-        <member name="F:TerraTechETCUtil.ManExtProj.stickyProj">
+        <member name="F:TerraTechETCUtil.ManExtProj.CanHaveGravity">
             <summary> Projectile getter </summary>
         </member>
-        <member name="F:TerraTechETCUtil.ManExtProj.explodeProj">
+        <member name="F:TerraTechETCUtil.ManExtProj.StickOnContact">
+            <summary> Projectile getter </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.ManExtProj.ExplosionInst">
             <summary> Projectile getter </summary>
         </member>
         <member name="F:TerraTechETCUtil.ManExtProj.projPool">
@@ -8282,6 +8488,13 @@
             <summary>
             Initiate <see cref="T:TerraTechETCUtil.ManExtProj"/>, automatically activated when needed
             </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.ManExtProj.GetPB(Projectile)">
+            <summary>
+            Get the <see cref="T:TerraTechETCUtil.ProjBase"/> quickly to navigate to other <see cref="T:TerraTechETCUtil.ExtProj"/>s
+            </summary>
+            <param name="inst"></param>
+            <returns></returns>
         </member>
         <member name="T:TerraTechETCUtil.ExtProj">
             <summary>
@@ -8311,20 +8524,25 @@
             Use PB (ProjBase) to access the main projectile from now on.
             </summary>
         </member>
-        <member name="M:TerraTechETCUtil.ExtProj.Fire(FireData)">
+        <member name="M:TerraTechETCUtil.ExtProj.Fire(FireData,Tank,ModuleWeapon)">
             <summary>
             Called when it's respective <see cref="T:Projectile"/> is fired
+            <para>Called with more detail than <see cref="F:Projectile.m_FiredEvent"/></para>
             </summary>
-            <param name="fireData"></param>
+            <param name="fireData">The data the <see cref="T:Projectile"/> was spawned from</param>
+            <param name="shooter">The <see cref="T:Tank"/> that shot this <see cref="T:Projectile"/></param>
+            <param name="firingPiece">The <see cref="T:ModuleWeapon"/> responsible for firing this <see cref="T:Projectile"/></param>
         </member>
         <member name="M:TerraTechETCUtil.ExtProj.WorldRemoval">
             <summary>
-            Called when the <see cref="T:Projectile"/> is removed from the world for any reason
+            Called when the <see cref="T:Projectile"/> is removed from the world for any reason.
+            <para>Called BEFORE <see cref="F:Projectile.m_RecycledEvent"/></para>
             </summary>
         </member>
         <member name="M:TerraTechETCUtil.ExtProj.Impact(UnityEngine.Collider,Damageable,UnityEngine.Vector3,System.Boolean@)">
             <summary>
             Called when the <see cref="T:Projectile"/> impacts anything
+            <para>Called with more detail than <see cref="F:Projectile.m_CollisionEvent"/></para>
             </summary>
             <param name="other"></param>
             <param name="damageable">Can be <b>null</b></param>
@@ -8334,6 +8552,7 @@
         <member name="M:TerraTechETCUtil.ExtProj.ImpactOther(UnityEngine.Collider,UnityEngine.Vector3,System.Boolean@)">
             <summary>
             Called when the <see cref="T:Projectile"/> impacts a non-<see cref="T:Damageable"/>
+            <para>Called with more detail than <see cref="F:Projectile.m_CollisionEvent"/></para>
             </summary>
             <param name="other"></param>
             <param name="hitPoint">In scene space</param>
@@ -8342,6 +8561,7 @@
         <member name="M:TerraTechETCUtil.ExtProj.ImpactDamageable(UnityEngine.Collider,Damageable,UnityEngine.Vector3,System.Boolean@)">
             <summary>
             Called when the <see cref="T:Projectile"/> impacts a <see cref="T:Damageable"/>
+            <para>Called with more detail than <see cref="F:Projectile.m_CollisionEvent"/></para>
             </summary>
             <param name="other"></param>
             <param name="damageable">Never <b>null</b></param>
@@ -8407,6 +8627,18 @@
             </summary>
             <param name="inst"></param>
             <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ProjBase.GetProjComponent``1">
+            <summary>
+            Gets a <see cref="T:TerraTechETCUtil.ExtProj"/> component on this the fast way
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ProjBase.OnWorldRemoval">
+            <summary>
+            Called BEFORE <see cref="F:Projectile.m_RecycledEvent"/>
+            </summary>
         </member>
         <member name="M:TerraTechETCUtil.ProjBase.ExplodeNoRecycle">
             <summary>
@@ -9053,6 +9285,7 @@
         <member name="F:TerraTechETCUtil.ManIngameWiki.WikiPage`2.ID">
             <summary>
             The main identification ID the game uses for this page.
+            <para><b>AVOID CHANGING THIS PLEASE UNLESS ABSOLUTELY NEEDED</b></para>
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.ManIngameWiki.WikiPage`2._inst">
@@ -9469,6 +9702,20 @@
             <param name="corp">The FactionSubTypes ID of the corp</param>
             <returns>The page if found, otherwise null</returns>
         </member>
+        <member name="M:TerraTechETCUtil.ManIngameWiki.GetSceneryPage(System.String)">
+            <summary>
+            Find a WikiPageScenery by the name
+            </summary>
+            <param name="sceneryName">The ENGLISH name of the page</param>
+            <returns>The page if found, otherwise null</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ManIngameWiki.GetBiomePage(System.String)">
+            <summary>
+            Find a WikiPageBiome by the name
+            </summary>
+            <param name="biomeName">The ENGLISH name of the page</param>
+            <returns>The page if found, otherwise null</returns>
+        </member>
         <member name="M:TerraTechETCUtil.ManIngameWiki.GetDamageStatsPage">
             <summary>
             Get the global WikiPageDamageStats page
@@ -9758,6 +10005,7 @@
         <member name="F:TerraTechETCUtil.ManModGUI.ModWikiGUIScale">
             <summary>
             The window of the managed Mod Wiki UI
+            <para>The lower this is, the smaller the buttons on the UI will appear</para>
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.ManModGUI.ModWikiGUIScaler">
@@ -9773,11 +10021,13 @@
         <member name="P:TerraTechETCUtil.ManModGUI.CurrentGUIScale">
             <summary>
             Current GUI scale of the managed UI systems relative to their contents resolution
+            <para>The lower this is, the smaller the buttons on the UI will appear</para>
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.ManModGUI.CurrentGUIScaleInv">
             <summary>
             Current GUI scale of the managed UI systems relative to their contents resolution
+            <para>The <b>higher</b> this is, the smaller the buttons on the UI will appear</para>
             </summary>
         </member>
         <member name="P:TerraTechETCUtil.ManModGUI.GameWindowScaledWidth">
@@ -9792,7 +10042,8 @@
         </member>
         <member name="F:TerraTechETCUtil.ManModGUI.GUIScale">
             <summary>
-            The scale of the managed UI systems relative to their contents resolution
+            The scale of the managed UI systems relative to their contents resolution.
+            <para>The lower this is, the smaller the buttons on the UI will appear</para>
             </summary>
         </member>
         <member name="F:TerraTechETCUtil.ManModGUI.GUIRescale">
@@ -10244,6 +10495,19 @@
             Transparancy of the window
             </summary>
         </member>
+        <member name="T:TerraTechETCUtil.MassPatchTypesAttribute">
+            <summary>
+            use this attached to a <see cref="T:TerraTechETCUtil.MassPatcher"/> function to target specific overrides, like 
+            <see cref="T:HarmonyLib.HarmonyPatch"/> <b>but not automatically added</b> on calling <see cref="M:HarmonyLib.Harmony.PatchAll"/>
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.MassPatchTypesAttribute.#ctor(System.Type[],System.Type[])">
+            <summary>
+            <inheritdoc cref="T:TerraTechETCUtil.MassPatchTypesAttribute"/>
+            </summary>
+            <param name="parameters">Types to target in override</param>
+            <param name="generics">Any generics to specify in target</param>
+        </member>
         <member name="T:TerraTechETCUtil.MassPatcher">
             <summary>
             A general-use patcher for Harmony with segmented error-checking to insure at least some patches get through if some fail
@@ -10289,28 +10553,54 @@
             <para>See also <seealso cref="T:TerraTechETCUtil.ExplosionHelper"/> for explosions</para>
             </summary>
         </member>
-        <member name="F:TerraTechETCUtil.SpawnHelper.BiomesByName">
+        <member name="P:TerraTechETCUtil.SpawnHelper.inst">
             <summary>
-            Lookup for biomes based on their names
+            Instance of <see cref="T:TerraTechETCUtil.SpawnHelper"/>
             </summary>
         </member>
-        <member name="F:TerraTechETCUtil.SpawnHelper.FirstBiomesByType">
+        <member name="F:TerraTechETCUtil.SpawnHelper.BiomesByName">
             <summary>
-            Lookup for biomes based on their <see cref="T:BiomeTypes"/>.  
-            Not advised as <see cref="T:BiomeTypes"/> appears obsolete.
-            <para>Use <see cref="F:TerraTechETCUtil.SpawnHelper.BiomesByName"/> instead.</para>
+            Lookup for <see cref="T:BiomeTypes"/> based on their <see cref="P:UnityEngine.Object.name"/>
             </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.SpawnHelper.SceneryTypeToFirstSceneryName">
+            <summary> SceneryTypes, SceneryName </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.SpawnHelper.SceneryByName">
+            <summary> SceneryName, TerrainObject prefab </summary>
+        </member>
+        <member name="F:TerraTechETCUtil.SpawnHelper.BiomeNameToSceneryNames">
+            <summary> BiomeName, SceneryName list </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.GetSceneryPrefabByName(System.String)">
+            <summary>
+            Find the <see cref="T:TerrainObject"/> based on the given <see cref="P:UnityEngine.Object.name"/>.
+            <para><seealso cref="T:TerrainObject"/>s <b>are not guaranteed to have <see cref="T:Visible"/> or <see cref="T:ResourceDispenser"/></b></para>
+            </summary>
+            <param name="sceneryName">The <see cref="P:UnityEngine.Object.name"/> of the <see cref="T:TerrainObject"/> filter by</param>
+            <returns>Lookup of <see cref="T:SceneryTypes"/> and variants of them based on naming</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.TryGetSceneryPrefabByName(System.String,TerrainObject@)">
+            <returns>True if found</returns>
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.GetSceneryPrefabByName(System.String)"/>
+            <summary>
+            
+            </summary>
+            <param name="sceneryName">The <see cref="P:UnityEngine.Object.name"/> of the <see cref="T:TerrainObject"/> filter by</param>
+            <param name="result">The found <see cref="T:TerrainObject"/> if return true</param>
         </member>
         <member name="M:TerraTechETCUtil.SpawnHelper.IterateSceneryTypesByIngredient(ChunkTypes)">
             <summary>
             Iterate <see cref="T:SceneryTypes"/> based on their ingredient <see cref="T:ChunkTypes"/>
+            <para><seealso cref="T:TerrainObject"/>s <b>are not guaranteed to have <see cref="T:Visible"/> or <see cref="T:ResourceDispenser"/></b></para>
             </summary>
             <param name="type">To filter by</param>
             <returns>Iterator for <see cref="T:SceneryTypes"/></returns>
         </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.GetSceneryByType(SceneryTypes)">
+        <member name="M:TerraTechETCUtil.SpawnHelper.IterateSceneryByType(SceneryTypes)">
             <summary>
             Find the <see cref="T:TerrainObject"/> based on the given <see cref="T:SceneryTypes"/>.
+            <para><seealso cref="T:TerrainObject"/>s <b>are not guaranteed to have <see cref="T:Visible"/> or <see cref="T:ResourceDispenser"/></b></para>
             </summary>
             <param name="type">To filter by</param>
             <returns>Lookup of <see cref="T:SceneryTypes"/> and variants of them based on naming</returns>
@@ -10319,10 +10609,11 @@
             <summary>
             Iterate all <see cref="T:TerrainObject"/>s based on <see cref="T:Biome"/> type name
             </summary>
-            <param name="type">The name of the <see cref="T:Biome"/> to search</param>
+            <param name="biomeName">The name of the <see cref="T:Biome"/> to search. 
+            <para><b>Not <see cref="T:BiomeTypes"/>.ToString()</b>, the <u><see cref="P:UnityEngine.Object.name"/>!</u></para></param>
             <returns>Iterator for <see cref="T:TerrainObject"/>s found</returns>
         </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.IterateSceneryTypes">
+        <member name="M:TerraTechETCUtil.SpawnHelper.IterateAllScenery">
             <summary>
             Iterate all <see cref="T:TerrainObject"/>s in the game
             </summary>
@@ -10354,29 +10645,67 @@
             <param name="name">The data name of the biome</param>
             <returns>The <see cref="T:BiomeTypes"/> of the biome</returns>
         </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.RefetchResources(BiomeMap)">
-            <summary>
-            Refresh the <see cref="T:BiomeMap"/>s gathered by <see cref="T:TerraTechETCUtil.SpawnHelper"/> incase it was changed
-            </summary>
-            <param name="ToMap">The <see cref="T:BiomeMap"/> to refetch for, leave null to do the whole game</param>
-        </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.RefreshBiomeResources(BiomeMap)">
-            <summary>
-            Refresh the <see cref="T:BiomeMap"/>s gathered by <see cref="T:TerraTechETCUtil.SpawnHelper"/> incase it was changed
-            </summary>
-            <param name="ToMap">The <see cref="T:BiomeMap"/> to refetch for, leave null to do the whole game</param>
-        </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.RefreshResources(BiomeMap)">
-            <summary>
-            Refresh the <see cref="T:BiomeMap"/>s gathered by <see cref="T:TerraTechETCUtil.SpawnHelper"/> incase it was changed
-            </summary>
-            <param name="ToMap">The <see cref="T:BiomeMap"/> to refetch for, leave null to do the whole game</param>
-        </member>
         <member name="M:TerraTechETCUtil.SpawnHelper.GrabInitList(System.Boolean)">
             <summary>
             Index all entries to be used in <see cref="T:TerraTechETCUtil.SpawnHelper"/>
             </summary>
             <param name="forceReInit"></param>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.RefetchScenery">
+            <summary>
+            Refresh the <see cref="T:TerrainObject"/>s gathered by <see cref="T:TerraTechETCUtil.SpawnHelper"/> incase it was changed
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.RefetchBiomes(BiomeMap)">
+            <summary>
+            Refresh the <see cref="T:BiomeMap"/>s gathered by <see cref="T:TerraTechETCUtil.SpawnHelper"/> incase it was changed
+            </summary>
+            <param name="ToMap">The <see cref="T:BiomeMap"/> to refetch for, leave null to do the <see cref="T:ModeMain"/>'s biomes</param>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.AddSceneryToBiomeLookup(TerrainObject,System.String)">
+            <summary>
+            Add Scenery to the <see cref="T:TerraTechETCUtil.SpawnHelper"/> lookup.
+            </summary>
+            <param name="sceneryInst">Must be properly named and not null</param>
+            <param name="biomeName">Biome name by <see cref="P:UnityEngine.Object.name"/></param>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.RemoveSceneryFromBiomeLookup(TerrainObject,System.String)">
+            <summary>
+            Remove Scenery from the <see cref="T:TerraTechETCUtil.SpawnHelper"/> lookup.
+            </summary>
+            <param name="sceneryInst">Must be properly named and not null</param>
+            <param name="biomeName">Biome name by <see cref="P:UnityEngine.Object.name"/></param>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.RefreshBiomeResources(BiomeMap)">
+            <summary>
+            Refresh the <see cref="T:BiomeMap"/>s gathered by <see cref="T:TerraTechETCUtil.SpawnHelper"/> incase it was changed
+            </summary>
+            <param name="ToMap">The <see cref="T:BiomeMap"/> to refetch for, leave null to do the <see cref="T:ModeMain"/>'s biomes</param>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.AddSceneryToLookup(TerrainObject,System.Boolean)">
+            <summary>
+            Add Scenery by <see cref="P:UnityEngine.Object.name"/> to our lookup.
+            </summary>
+            <param name="sceneryInst">Must be properly named and not null</param>
+            <param name="log">to log if this failed with a duplicate instance that has the same name but different</param>
+            <returns>True if we just added</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.RemoveSceneryFromLookup(TerrainObject)">
+            <summary>
+            
+            </summary>
+            <param name="sceneryInst">Must be properly named and not null</param>
+            <returns>True if we just removed</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.RefreshOnlyScenery">
+            <summary>
+            Refresh the <see cref="T:TerrainObject"/>s gathered by <see cref="T:TerraTechETCUtil.SpawnHelper"/> incase it was changed
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.LogAllRegisteredTerrainObjects">
+            <summary>
+            Logs all indexed <see cref="T:TerrainObject"/>s in <see cref="T:TerraTechETCUtil.SpawnHelper"/> by name in Debug.Log()
+            </summary>
         </member>
         <member name="M:TerraTechETCUtil.SpawnHelper.PrintAllRegisteredResourceNodes(System.Text.StringBuilder)">
             <summary>
@@ -10384,78 +10713,77 @@
             </summary>
             <param name="SB">The <see cref="T:System.Text.StringBuilder"/> to write it all to</param>
         </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.PrintAllRegisteredNonResourceObjects(System.Text.StringBuilder)">
+        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeExplosion(System.String,UnityEngine.Vector3)">
             <summary>
-            Logs all indexed <b>non-</b><see cref="T:TerrainObject"/>s in <see cref="T:TerraTechETCUtil.SpawnHelper"/>
+            Get a <see cref="T:ResourceDispenser"/> Scenery <b>explosion</b> <i>instance</i> using given data
             </summary>
-            <param name="SB">The <see cref="T:System.Text.StringBuilder"/> to write it all to</param>
-        </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.GetNonResourcePrefab(System.String)">
-            <summary>
-            Find a prefab using given data
-            </summary>
-            <param name="Name">The <see cref="P:UnityEngine.Object.name"/> to search by</param>
-            <returns>Found object, otherwise null</returns>
-        </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.GetResourceNodePrefab(SceneryTypes,System.String)">
-            <summary>
-            Find a prefab using given data
-            </summary>
-            <param name="type">The <see cref="T:SceneryTypes"/> to search by. 
-            <see cref="T:SceneryTypes"/> are partially obsolete, vague and not recommended</param>
-            <param name="biomeName">The name of the <see cref="T:Biome"/> to search by. </param>
-            <returns>Found object, otherwise null</returns>
-        </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.GetResourceNodePrefab(System.String)">
-            <summary>
-            Find a prefab using given data
-            </summary>
-            <param name="name">The <see cref="P:UnityEngine.Object.name"/> to search by</param>
-            <returns>Found object, otherwise null</returns>
-        </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeExplosion(UnityEngine.Vector3,SceneryTypes,System.String)">
-            <summary>
-            Spawn a <see cref="T:ResourceDispenser"/> Scenery <b>explosion</b> using given data
-            </summary>
+            <param name="sceneryName">The name of the <see cref="T:TerrainObject"/> to search by. </param>
             <param name="scenePos">The scene positioning of the explosion.</param>
-            <param name="type">The <see cref="T:SceneryTypes"/> to search by.</param>
-            <param name="biomeName">The name of the <see cref="T:Biome"/> to search by. </param>
         </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeExplosion(UnityEngine.Vector3,ResourceDispenser)">
+        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeExplosion(SceneryTypes,UnityEngine.Vector3)">
+            <summary>
+            <para><b>Not advised to use <see cref="T:SceneryTypes"/> as it appears obsolete</b></para>
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeExplosion(System.String,UnityEngine.Vector3)"/>
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeExplosion(System.String,UnityEngine.Vector3)"/>
+            <param name="scenePos"></param>
+            <param name="type">The <see cref="T:SceneryTypes"/> to search by.</param>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeExplosion(ResourceDispenser,UnityEngine.Vector3)">
             <summary>
             Spawn a <see cref="T:ResourceDispenser"/> Scenery <b>explosion</b> using given data
             </summary>
             <param name="scenePos">The scene positioning of the explosion.</param>
             <param name="resDisp">The direct reference to the <see cref="T:ResourceDispenser"/> to use.</param>
         </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeSnapTerrain(UnityEngine.Vector3,SceneryTypes,System.String)">
+        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNode(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
             <summary>
             Spawn a <see cref="T:ResourceDispenser"/> Scenery using given data
             </summary>
+            <param name="sceneryName">The <see cref="P:UnityEngine.Object.name"/> of the <see cref="T:TerrainObject"/> filter by</param>
             <param name="scenePos">The scene positioning of the spawned resource node.</param>
-            <param name="type">The <see cref="T:SceneryTypes"/> to search by.</param>
-            <param name="biomeName">The name of the <see cref="T:Biome"/> to search by.</param>
+            <param name="rotation">The scene rotation of the spawned resource node.
+            <para>Leave at <b>default</b> to use random rotation.</para></param>
+            <param name="snapTerrain">Snap this to the terrain below it</param>
             <returns>a <see cref="T:ResourceDispenser"/> if found, otherwise null</returns>
         </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNode(UnityEngine.Vector3,UnityEngine.Quaternion,SceneryTypes,System.String)">
+        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNode(SceneryTypes,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
             <summary>
-            Spawn a <see cref="T:ResourceDispenser"/> Scenery using given data
+            <para><b>Not advised to use <see cref="T:SceneryTypes"/> as it appears obsolete</b></para>
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNode(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)"/>
             </summary>
-            <param name="scenePos">The scene positioning of the spawned resource node.</param>
-            <param name="rotation">The scene rotation of the spawned resource node.</param>
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNode(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)"/>
+            <param name="scenePos"></param>
             <param name="type">The <see cref="T:SceneryTypes"/> to search by.</param>
-            <param name="biomeName">The name of the <see cref="T:Biome"/> to search by.</param>
-            <returns>a <see cref="T:ResourceDispenser"/> if found, otherwise null</returns>
+            <param name="rotation"></param>
+            <param name="snapTerrain"></param>
+            <returns></returns>
         </member>
-        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeAnimated(UnityEngine.Vector3,UnityEngine.Quaternion,SceneryTypes,System.String)">
+        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeAnimated(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
             <summary>
-            Spawn a <see cref="T:ResourceDispenser"/> Scenery using given data, playing the <c>Regrow()</c> animation
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNode(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)"/>
+            <para>Plays the <see cref="T:ResourceDispenser"/><c>.Regrow()</c> animation</para>
             </summary>
-            <param name="scenePos">The scene positioning of the spawned resource node.</param>
-            <param name="rotation">The scene rotation of the spawned resource node.</param>
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNode(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)"/>
+            <param name="sceneryName"></param>
+            <param name="scenePos"></param>
+            <param name="rotation"></param>
+            <param name="snapTerrain"></param>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException"></exception>
+        </member>
+        <member name="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeAnimated(SceneryTypes,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)">
+            <summary>
+            <para><b>Not advised to use <see cref="T:SceneryTypes"/> as it appears obsolete</b></para>
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeAnimated(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)"/>
+            </summary>
+            <inheritdoc cref="M:TerraTechETCUtil.SpawnHelper.SpawnResourceNodeAnimated(System.String,UnityEngine.Vector3,UnityEngine.Quaternion,System.Boolean)"/>
+            <param name="scenePos"></param>
             <param name="type">The <see cref="T:SceneryTypes"/> to search by.</param>
-            <param name="biomeName">The name of the <see cref="T:Biome"/> to search by.</param>
-            <returns>a <see cref="T:ResourceDispenser"/> if found, otherwise null</returns>
+            <param name="rotation"></param>
+            <param name="snapTerrain"></param>
+            <returns></returns>
+            <exception cref="T:System.NullReferenceException"></exception>
         </member>
         <member name="M:TerraTechETCUtil.SpawnHelper.DestroyResourceNode(ResourceDispenser,UnityEngine.Vector3,System.Boolean)">
             <summary>
@@ -11780,6 +12108,22 @@
             </summary>
             <typeparam name="T">The <see cref="T:System.Type"/> to search for.</typeparam>
             <param name="GO">The <see cref="T:UnityEngine.GameObject"/> to search through.</param>
+        </member>
+        <member name="F:TerraTechETCUtil.Utilities.ForceQuaternionComplaining">
+            <summary>
+            Force <see cref="M:TerraTechETCUtil.Utilities.LookRot(UnityEngine.Vector3,UnityEngine.Vector3)"/> to complain when <c>forward</c> is zero in all axis.  ONLY ENABLE IF YOU NEED TO DEBUG
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.LookRot(UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            A quiet version of <see cref="M:UnityEngine.Quaternion.LookRotation(UnityEngine.Vector3,UnityEngine.Vector3)"/> that doesn't spam the log if <paramref name="forward"/> is zero in all axi
+            </summary>
+            <param name="forward">The forwards direction this should rotate to look at</param>
+            <param name="up">the upwards bias it should have.  This only affects the roll <b>AFTER</b> forward looks at the target</param>
+            <returns>A <see cref="T:UnityEngine.Quaternion"/> looking at the given target in scene space</returns>
+        </member>
+        <member name="M:TerraTechETCUtil.Utilities.LookRot(UnityEngine.Vector3)">
+            <inheritdoc cref="M:TerraTechETCUtil.Utilities.LookRot(UnityEngine.Vector3,UnityEngine.Vector3)"/>
         </member>
         <member name="M:TerraTechETCUtil.Utilities.AddInlined``3(System.Collections.Generic.IDictionary{``0,``1},``0,``2)">
             <summary>
