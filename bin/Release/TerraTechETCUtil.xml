@@ -3615,12 +3615,12 @@
             PatchProjectileRemove
             </summary>
         </member>
-        <member name="M:TerraTechETCUtil.AllProjectilePatches.ProjectilePatches.HandleCollision_Prefix(Projectile,Damageable@,UnityEngine.Vector3@,UnityEngine.Collider@,System.Boolean@)">
+        <member name="M:TerraTechETCUtil.AllProjectilePatches.ProjectilePatches.HandleCollision_Prefix(Projectile,Damageable,UnityEngine.Vector3,UnityEngine.Collider,System.Boolean@)">
             <summary>
             PatchProjectileCollision
             </summary>
         </member>
-        <member name="M:TerraTechETCUtil.AllProjectilePatches.ProjectilePatches.Fire_Postfix(Projectile,FireData@,ModuleWeapon@,Tank@)">
+        <member name="M:TerraTechETCUtil.AllProjectilePatches.ProjectilePatches.Fire_Postfix(Projectile,FireData,ModuleWeapon,Tank)">
             <summary>
             PatchProjectileFire
             </summary>
@@ -6362,23 +6362,34 @@
         <member name="F:TerraTechETCUtil.SFXHelpers.freeAudio">
             <summary>  </summary>
         </member>
-        <member name="M:TerraTechETCUtil.SFXHelpers.RegisterFloatingSFX``1(UnityEngine.Transform,``0)">
+        <member name="T:TerraTechETCUtil.SFXHelpers.IExtAudioEvent">
             <summary>
-            Not advised.  Allows playing of SFX BUT it's incorrectly tied to the position 
-             of the first player Tech that was active the first time this function is called!!!
+            <see cref="T:TechAudio.IModuleAudioProvider"/> but for using the audio on non-Techs
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="trans"></param>
-            <param name="module"></param>
         </member>
-        <member name="M:TerraTechETCUtil.SFXHelpers.UnregisterFloatingSFX``1(UnityEngine.Transform,``0)">
+        <member name="P:TerraTechETCUtil.SFXHelpers.IExtAudioEvent.trans">
             <summary>
-            Not advised.  Allows playing of SFX BUT it's incorrectly tied to the position 
-             of the first player Tech that was active the first time this function is called!!!
+            Target transform to attach to
             </summary>
-            <typeparam name="T"></typeparam>
-            <param name="trans"></param>
-            <param name="module"></param>
+        </member>
+        <member name="P:TerraTechETCUtil.SFXHelpers.IExtAudioEvent.rbody">
+            <summary>
+            optional rigidbody to attach to
+            </summary>
+        </member>
+        <member name="M:TerraTechETCUtil.SFXHelpers.RegisterFloatingSFX``1(``0)">
+            <summary>
+            Allows playing of Tech SFX but not on a Tech as long as there is at least one active tech on the scene when this is called.
+            </summary>
+            <typeparam name="T">The <see cref="T:TerraTechETCUtil.SFXHelpers.IExtAudioEvent"/> type providing the SFX</typeparam>
+            <param name="module"><see cref="T:TerraTechETCUtil.SFXHelpers.IExtAudioEvent"/> providing the SFX</param>
+        </member>
+        <member name="M:TerraTechETCUtil.SFXHelpers.UnregisterFloatingSFX``1(``0)">
+            <summary>
+            Allows ending the playing of Tech SFX but not on a Tech
+            </summary>
+            <typeparam name="T">The <see cref="T:TerraTechETCUtil.SFXHelpers.IExtAudioEvent"/> type providing the SFX</typeparam>
+            <param name="module"><see cref="T:TerraTechETCUtil.SFXHelpers.IExtAudioEvent"/> providing the SFX</param>
         </member>
         <member name="M:TerraTechETCUtil.SFXHelpers.TankPlayOneshot(Tank,TechAudio.SFXType)">
             <summary>
@@ -8619,6 +8630,16 @@
             Insures <see cref="T:TerraTechETCUtil.ProjBase"/> on this <see cref="T:Projectile"/>
             </summary>
             <param name="inst"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TerraTechETCUtil.ProjBase.InsureAndFire(Projectile,FireData,ModuleWeapon,Tank)">
+            <summary>
+            Insures <see cref="T:TerraTechETCUtil.ProjBase"/> on this <see cref="T:Projectile"/>
+            </summary>
+            <param name="inst"></param>
+            <param name="fireData"></param>
+            <param name="weapon"></param>
+            <param name="shooter"></param>
             <returns></returns>
         </member>
         <member name="M:TerraTechETCUtil.ProjBase.PoolEmergency(Projectile)">
